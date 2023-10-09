@@ -10,8 +10,8 @@ import SwiftUI
 @main
 struct UnsplashPetProjectApp: App {
     var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+      WindowGroup {
+        InfiniteListView(viewModel: InfiniteListViewModel())
+      }
     }
 }
