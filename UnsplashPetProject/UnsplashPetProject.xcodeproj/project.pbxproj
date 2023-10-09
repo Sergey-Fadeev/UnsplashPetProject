@@ -18,6 +18,7 @@
 		895BFC0A2AD42EA1006BBEDC /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFC092AD42EA1006BBEDC /* NetworkService.swift */; };
 		895BFC0E2AD42EE0006BBEDC /* InfiniteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFC0D2AD42EE0006BBEDC /* InfiniteListView.swift */; };
 		895BFC102AD42EFE006BBEDC /* ListItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFC0F2AD42EFE006BBEDC /* ListItemRowView.swift */; };
+		895BFC122AD43741006BBEDC /* ImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFC112AD43741006BBEDC /* ImageResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		895BFC092AD42EA1006BBEDC /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		895BFC0D2AD42EE0006BBEDC /* InfiniteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteListView.swift; sourceTree = "<group>"; };
 		895BFC0F2AD42EFE006BBEDC /* ListItemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemRowView.swift; sourceTree = "<group>"; };
+		895BFC112AD43741006BBEDC /* ImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				895BFC0B2AD42EB7006BBEDC /* View */,
-				895BFC042AD42E5E006BBEDC /* APIService */,
 				895BFC012AD42E2B006BBEDC /* ViewModel */,
+				895BFC042AD42E5E006BBEDC /* APIService */,
 				895BFBD12AD42865006BBEDC /* UnsplashPetProjectApp.swift */,
 				895BFBD52AD42867006BBEDC /* Assets.xcassets */,
 				895BFBD72AD42867006BBEDC /* Preview Content */,
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				895BFC072AD42E85006BBEDC /* APIUnsplashResponse.swift */,
+				895BFC112AD43741006BBEDC /* ImageResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 			files = (
 				895BFC0E2AD42EE0006BBEDC /* InfiniteListView.swift in Sources */,
 				895BFC032AD42E3C006BBEDC /* InfiniteListViewModel.swift in Sources */,
+				895BFC122AD43741006BBEDC /* ImageResponse.swift in Sources */,
 				895BFC102AD42EFE006BBEDC /* ListItemRowView.swift in Sources */,
 				895BFC082AD42E85006BBEDC /* APIUnsplashResponse.swift in Sources */,
 				895BFC0A2AD42EA1006BBEDC /* NetworkService.swift in Sources */,
