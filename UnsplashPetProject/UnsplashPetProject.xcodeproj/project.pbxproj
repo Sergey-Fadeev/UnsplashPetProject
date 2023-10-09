@@ -1,0 +1,593 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		895BFBD22AD42865006BBEDC /* UnsplashPetProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFBD12AD42865006BBEDC /* UnsplashPetProjectApp.swift */; };
+		895BFBD42AD42865006BBEDC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFBD32AD42865006BBEDC /* ContentView.swift */; };
+		895BFBD62AD42867006BBEDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895BFBD52AD42867006BBEDC /* Assets.xcassets */; };
+		895BFBD92AD42867006BBEDC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895BFBD82AD42867006BBEDC /* Preview Assets.xcassets */; };
+		895BFBE32AD42867006BBEDC /* UnsplashPetProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFBE22AD42867006BBEDC /* UnsplashPetProjectTests.swift */; };
+		895BFBED2AD42867006BBEDC /* UnsplashPetProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFBEC2AD42867006BBEDC /* UnsplashPetProjectUITests.swift */; };
+		895BFBEF2AD42867006BBEDC /* UnsplashPetProjectUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFBEE2AD42867006BBEDC /* UnsplashPetProjectUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		895BFBDF2AD42867006BBEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 895BFBC62AD42865006BBEDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 895BFBCD2AD42865006BBEDC;
+			remoteInfo = UnsplashPetProject;
+		};
+		895BFBE92AD42867006BBEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 895BFBC62AD42865006BBEDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 895BFBCD2AD42865006BBEDC;
+			remoteInfo = UnsplashPetProject;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		895BFBCE2AD42865006BBEDC /* UnsplashPetProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashPetProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		895BFBD12AD42865006BBEDC /* UnsplashPetProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashPetProjectApp.swift; sourceTree = "<group>"; };
+		895BFBD32AD42865006BBEDC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		895BFBD52AD42867006BBEDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		895BFBD82AD42867006BBEDC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		895BFBDE2AD42867006BBEDC /* UnsplashPetProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnsplashPetProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		895BFBE22AD42867006BBEDC /* UnsplashPetProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashPetProjectTests.swift; sourceTree = "<group>"; };
+		895BFBE82AD42867006BBEDC /* UnsplashPetProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnsplashPetProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		895BFBEC2AD42867006BBEDC /* UnsplashPetProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashPetProjectUITests.swift; sourceTree = "<group>"; };
+		895BFBEE2AD42867006BBEDC /* UnsplashPetProjectUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashPetProjectUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		895BFBCB2AD42865006BBEDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		895BFBDB2AD42867006BBEDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		895BFBE52AD42867006BBEDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		895BFBC52AD42865006BBEDC = {
+			isa = PBXGroup;
+			children = (
+				895BFBD02AD42865006BBEDC /* UnsplashPetProject */,
+				895BFBE12AD42867006BBEDC /* UnsplashPetProjectTests */,
+				895BFBEB2AD42867006BBEDC /* UnsplashPetProjectUITests */,
+				895BFBCF2AD42865006BBEDC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		895BFBCF2AD42865006BBEDC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				895BFBCE2AD42865006BBEDC /* UnsplashPetProject.app */,
+				895BFBDE2AD42867006BBEDC /* UnsplashPetProjectTests.xctest */,
+				895BFBE82AD42867006BBEDC /* UnsplashPetProjectUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		895BFBD02AD42865006BBEDC /* UnsplashPetProject */ = {
+			isa = PBXGroup;
+			children = (
+				895BFBD12AD42865006BBEDC /* UnsplashPetProjectApp.swift */,
+				895BFBD32AD42865006BBEDC /* ContentView.swift */,
+				895BFBD52AD42867006BBEDC /* Assets.xcassets */,
+				895BFBD72AD42867006BBEDC /* Preview Content */,
+			);
+			path = UnsplashPetProject;
+			sourceTree = "<group>";
+		};
+		895BFBD72AD42867006BBEDC /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				895BFBD82AD42867006BBEDC /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		895BFBE12AD42867006BBEDC /* UnsplashPetProjectTests */ = {
+			isa = PBXGroup;
+			children = (
+				895BFBE22AD42867006BBEDC /* UnsplashPetProjectTests.swift */,
+			);
+			path = UnsplashPetProjectTests;
+			sourceTree = "<group>";
+		};
+		895BFBEB2AD42867006BBEDC /* UnsplashPetProjectUITests */ = {
+			isa = PBXGroup;
+			children = (
+				895BFBEC2AD42867006BBEDC /* UnsplashPetProjectUITests.swift */,
+				895BFBEE2AD42867006BBEDC /* UnsplashPetProjectUITestsLaunchTests.swift */,
+			);
+			path = UnsplashPetProjectUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		895BFBCD2AD42865006BBEDC /* UnsplashPetProject */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 895BFBF22AD42867006BBEDC /* Build configuration list for PBXNativeTarget "UnsplashPetProject" */;
+			buildPhases = (
+				895BFBCA2AD42865006BBEDC /* Sources */,
+				895BFBCB2AD42865006BBEDC /* Frameworks */,
+				895BFBCC2AD42865006BBEDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UnsplashPetProject;
+			productName = UnsplashPetProject;
+			productReference = 895BFBCE2AD42865006BBEDC /* UnsplashPetProject.app */;
+			productType = "com.apple.product-type.application";
+		};
+		895BFBDD2AD42867006BBEDC /* UnsplashPetProjectTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 895BFBF52AD42867006BBEDC /* Build configuration list for PBXNativeTarget "UnsplashPetProjectTests" */;
+			buildPhases = (
+				895BFBDA2AD42867006BBEDC /* Sources */,
+				895BFBDB2AD42867006BBEDC /* Frameworks */,
+				895BFBDC2AD42867006BBEDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				895BFBE02AD42867006BBEDC /* PBXTargetDependency */,
+			);
+			name = UnsplashPetProjectTests;
+			productName = UnsplashPetProjectTests;
+			productReference = 895BFBDE2AD42867006BBEDC /* UnsplashPetProjectTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		895BFBE72AD42867006BBEDC /* UnsplashPetProjectUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 895BFBF82AD42867006BBEDC /* Build configuration list for PBXNativeTarget "UnsplashPetProjectUITests" */;
+			buildPhases = (
+				895BFBE42AD42867006BBEDC /* Sources */,
+				895BFBE52AD42867006BBEDC /* Frameworks */,
+				895BFBE62AD42867006BBEDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				895BFBEA2AD42867006BBEDC /* PBXTargetDependency */,
+			);
+			name = UnsplashPetProjectUITests;
+			productName = UnsplashPetProjectUITests;
+			productReference = 895BFBE82AD42867006BBEDC /* UnsplashPetProjectUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		895BFBC62AD42865006BBEDC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					895BFBCD2AD42865006BBEDC = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					895BFBDD2AD42867006BBEDC = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 895BFBCD2AD42865006BBEDC;
+					};
+					895BFBE72AD42867006BBEDC = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 895BFBCD2AD42865006BBEDC;
+					};
+				};
+			};
+			buildConfigurationList = 895BFBC92AD42865006BBEDC /* Build configuration list for PBXProject "UnsplashPetProject" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 895BFBC52AD42865006BBEDC;
+			productRefGroup = 895BFBCF2AD42865006BBEDC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				895BFBCD2AD42865006BBEDC /* UnsplashPetProject */,
+				895BFBDD2AD42867006BBEDC /* UnsplashPetProjectTests */,
+				895BFBE72AD42867006BBEDC /* UnsplashPetProjectUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		895BFBCC2AD42865006BBEDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				895BFBD92AD42867006BBEDC /* Preview Assets.xcassets in Resources */,
+				895BFBD62AD42867006BBEDC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		895BFBDC2AD42867006BBEDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		895BFBE62AD42867006BBEDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		895BFBCA2AD42865006BBEDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				895BFBD42AD42865006BBEDC /* ContentView.swift in Sources */,
+				895BFBD22AD42865006BBEDC /* UnsplashPetProjectApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		895BFBDA2AD42867006BBEDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				895BFBE32AD42867006BBEDC /* UnsplashPetProjectTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		895BFBE42AD42867006BBEDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				895BFBEF2AD42867006BBEDC /* UnsplashPetProjectUITestsLaunchTests.swift in Sources */,
+				895BFBED2AD42867006BBEDC /* UnsplashPetProjectUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		895BFBE02AD42867006BBEDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 895BFBCD2AD42865006BBEDC /* UnsplashPetProject */;
+			targetProxy = 895BFBDF2AD42867006BBEDC /* PBXContainerItemProxy */;
+		};
+		895BFBEA2AD42867006BBEDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 895BFBCD2AD42865006BBEDC /* UnsplashPetProject */;
+			targetProxy = 895BFBE92AD42867006BBEDC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		895BFBF02AD42867006BBEDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		895BFBF12AD42867006BBEDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		895BFBF32AD42867006BBEDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"UnsplashPetProject/Preview Content\"";
+				DEVELOPMENT_TEAM = CA8M7X82UD;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "-1111.UnsplashPetProject";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		895BFBF42AD42867006BBEDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"UnsplashPetProject/Preview Content\"";
+				DEVELOPMENT_TEAM = CA8M7X82UD;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "-1111.UnsplashPetProject";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		895BFBF62AD42867006BBEDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CA8M7X82UD;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "-1111.UnsplashPetProjectTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UnsplashPetProject.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UnsplashPetProject";
+			};
+			name = Debug;
+		};
+		895BFBF72AD42867006BBEDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CA8M7X82UD;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "-1111.UnsplashPetProjectTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UnsplashPetProject.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UnsplashPetProject";
+			};
+			name = Release;
+		};
+		895BFBF92AD42867006BBEDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CA8M7X82UD;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "-1111.UnsplashPetProjectUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = UnsplashPetProject;
+			};
+			name = Debug;
+		};
+		895BFBFA2AD42867006BBEDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CA8M7X82UD;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "-1111.UnsplashPetProjectUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = UnsplashPetProject;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		895BFBC92AD42865006BBEDC /* Build configuration list for PBXProject "UnsplashPetProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				895BFBF02AD42867006BBEDC /* Debug */,
+				895BFBF12AD42867006BBEDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		895BFBF22AD42867006BBEDC /* Build configuration list for PBXNativeTarget "UnsplashPetProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				895BFBF32AD42867006BBEDC /* Debug */,
+				895BFBF42AD42867006BBEDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		895BFBF52AD42867006BBEDC /* Build configuration list for PBXNativeTarget "UnsplashPetProjectTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				895BFBF62AD42867006BBEDC /* Debug */,
+				895BFBF72AD42867006BBEDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		895BFBF82AD42867006BBEDC /* Build configuration list for PBXNativeTarget "UnsplashPetProjectUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				895BFBF92AD42867006BBEDC /* Debug */,
+				895BFBFA2AD42867006BBEDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 895BFBC62AD42865006BBEDC /* Project object */;
+}
