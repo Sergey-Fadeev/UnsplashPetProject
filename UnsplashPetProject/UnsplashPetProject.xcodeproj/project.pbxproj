@@ -19,6 +19,8 @@
 		895BFC0E2AD42EE0006BBEDC /* InfiniteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFC0D2AD42EE0006BBEDC /* InfiniteListView.swift */; };
 		895BFC102AD42EFE006BBEDC /* ListItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFC0F2AD42EFE006BBEDC /* ListItemRowView.swift */; };
 		895BFC122AD43741006BBEDC /* ImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFC112AD43741006BBEDC /* ImageResponse.swift */; };
+		89C0D1332AD54B2900FDCDD5 /* ListImageRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C0D1322AD54B2900FDCDD5 /* ListImageRowItem.swift */; };
+		89C0D1362AD551B500FDCDD5 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 89C0D1352AD551B500FDCDD5 /* WaterfallGrid */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,7 @@
 		895BFC0D2AD42EE0006BBEDC /* InfiniteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteListView.swift; sourceTree = "<group>"; };
 		895BFC0F2AD42EFE006BBEDC /* ListItemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemRowView.swift; sourceTree = "<group>"; };
 		895BFC112AD43741006BBEDC /* ImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResponse.swift; sourceTree = "<group>"; };
+		89C0D1322AD54B2900FDCDD5 /* ListImageRowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListImageRowItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89C0D1362AD551B500FDCDD5 /* WaterfallGrid in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,8 +180,8 @@
 		895BFC0B2AD42EB7006BBEDC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				895BFC0C2AD42ECF006BBEDC /* Cells */,
 				895BFC0D2AD42EE0006BBEDC /* InfiniteListView.swift */,
+				895BFC0C2AD42ECF006BBEDC /* Cells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				895BFC0F2AD42EFE006BBEDC /* ListItemRowView.swift */,
+				89C0D1322AD54B2900FDCDD5 /* ListImageRowItem.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -206,6 +211,9 @@
 			dependencies = (
 			);
 			name = UnsplashPetProject;
+			packageProductDependencies = (
+				89C0D1352AD551B500FDCDD5 /* WaterfallGrid */,
+			);
 			productName = UnsplashPetProject;
 			productReference = 895BFBCE2AD42865006BBEDC /* UnsplashPetProject.app */;
 			productType = "com.apple.product-type.application";
@@ -278,6 +286,9 @@
 				Base,
 			);
 			mainGroup = 895BFBC52AD42865006BBEDC;
+			packageReferences = (
+				89C0D1342AD551B500FDCDD5 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
+			);
 			productRefGroup = 895BFBCF2AD42865006BBEDC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -327,6 +338,7 @@
 				895BFC082AD42E85006BBEDC /* APIUnsplashResponse.swift in Sources */,
 				895BFC0A2AD42EA1006BBEDC /* NetworkService.swift in Sources */,
 				895BFBD22AD42865006BBEDC /* UnsplashPetProjectApp.swift in Sources */,
+				89C0D1332AD54B2900FDCDD5 /* ListImageRowItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -656,6 +668,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		89C0D1342AD551B500FDCDD5 /* XCRemoteSwiftPackageReference "WaterfallGrid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/paololeonardi/WaterfallGrid";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		89C0D1352AD551B500FDCDD5 /* WaterfallGrid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89C0D1342AD551B500FDCDD5 /* XCRemoteSwiftPackageReference "WaterfallGrid" */;
+			productName = WaterfallGrid;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 895BFBC62AD42865006BBEDC /* Project object */;
 }

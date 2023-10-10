@@ -5,7 +5,7 @@
 //  Created by Sergey on 09.10.2023.
 //
 
-struct APIImageResponse: Codable {
+struct APIImageResponse: Codable, Identifiable {
   
     let id, slug: String
     let createdAt, updatedAt: String
@@ -13,14 +13,14 @@ struct APIImageResponse: Codable {
     let width, height: Int
     let color, blurHash: String
     let description: String?
-    let altDescription: String
+    let altDescription: String?
     let imageUrls: APIImageUrlsResponse
     let links: APIImageLinksResponse
     let likes: Int
     let likedByUser: Bool
     let sponsorship: APISponsorshipResponse?
     let topicSubmissions: APITopicSubmissionsResponse
-    let user: APIUserResponse
+    let user: APIUserResponse?
 
     enum CodingKeys: String, CodingKey {
         case id, slug
@@ -77,7 +77,7 @@ struct APIUserResponse: Codable {
     let lastName, twitterUsername: String?
     let portfolioURL: String?
     let bio: String?
-    let location: String
+    let location: String?
     let links: APIUserLinksResponse
     let profileImage: APIProfileImageResponse
     let instagramUsername: String?
