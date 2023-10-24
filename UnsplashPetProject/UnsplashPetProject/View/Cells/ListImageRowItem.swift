@@ -17,8 +17,10 @@ struct ListImageRowItem: View {
 //      AsyncImage(url: URL(string: item.imageUrls.small))
 //        .frame(width: 50, height: 50)
       
+      print("url - \(item.imageUrls.regular)")
       
-      AsyncImage(
+      
+      return AsyncImage(
         url: URL(string: item.imageUrls.regular),
         content: { image in
           image

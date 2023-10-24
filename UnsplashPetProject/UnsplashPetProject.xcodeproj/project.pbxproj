@@ -21,6 +21,7 @@
 		895BFC122AD43741006BBEDC /* ImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFC112AD43741006BBEDC /* ImageResponse.swift */; };
 		89C0D1332AD54B2900FDCDD5 /* ListImageRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C0D1322AD54B2900FDCDD5 /* ListImageRowItem.swift */; };
 		89C0D1362AD551B500FDCDD5 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 89C0D1352AD551B500FDCDD5 /* WaterfallGrid */; };
+		89E677BF2AE7EF910008C06D /* NewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E677BE2AE7EF910008C06D /* NewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		895BFC0F2AD42EFE006BBEDC /* ListItemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemRowView.swift; sourceTree = "<group>"; };
 		895BFC112AD43741006BBEDC /* ImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResponse.swift; sourceTree = "<group>"; };
 		89C0D1322AD54B2900FDCDD5 /* ListImageRowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListImageRowItem.swift; sourceTree = "<group>"; };
+		89E677BE2AE7EF910008C06D /* NewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 		895BFC012AD42E2B006BBEDC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				89E677BE2AE7EF910008C06D /* NewViewModel.swift */,
 				895BFC022AD42E3C006BBEDC /* InfiniteListViewModel.swift */,
 			);
 			path = ViewModel;
@@ -331,6 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89E677BF2AE7EF910008C06D /* NewViewModel.swift in Sources */,
 				895BFC0E2AD42EE0006BBEDC /* InfiniteListView.swift in Sources */,
 				895BFC032AD42E3C006BBEDC /* InfiniteListViewModel.swift in Sources */,
 				895BFC122AD43741006BBEDC /* ImageResponse.swift in Sources */,

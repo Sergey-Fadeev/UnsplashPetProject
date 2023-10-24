@@ -11,7 +11,9 @@ import SwiftUI
 struct UnsplashPetProjectApp: App {
     var body: some Scene {
       WindowGroup {
-        InfiniteListView(viewModel: InfiniteListViewModel())
+//        InfiniteListView(viewModel: InfiniteListViewModel())
+        
+        ContentView()
       }
     }
 }
