@@ -13,7 +13,7 @@ struct UnsplashPetProjectApp: App {
       WindowGroup {
 //        InfiniteListView(viewModel: InfiniteListViewModel())
         
-        ContentView()
+        ContentView(viewModel: ImageLoaderViewModel())
       }
     }
 }

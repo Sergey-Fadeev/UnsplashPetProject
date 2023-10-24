@@ -5,73 +5,73 @@
 //  Created by Sergey on 09.10.2023.
 //
 
-import SwiftUI
-import WaterfallGrid
-import Combine
-
-struct InfiniteListView: View {
-  
-  let detector: CurrentValueSubject<CGFloat, Never>
-  let publisher: AnyPublisher<CGFloat, Never>
-  
-  @ObservedObject var viewModel: InfiniteListViewModel
-  
-  init(viewModel: InfiniteListViewModel) {
-    self.viewModel = viewModel
-    viewModel.requestInitialSetOfItems()
-    
-    let detector = CurrentValueSubject<CGFloat, Never>(0)
-    
-    self.publisher = detector
-      .debounce(for: .seconds(0.2), scheduler: DispatchQueue.main)
-      .dropFirst()
-      .eraseToAnyPublisher()
-    
-    self.detector = detector
-  }
-  
-  var body: some View {
-    let items = $viewModel.imageUrls.enumerated().map { $0 }
-    
-    ScrollView(.vertical) {
-      WaterfallGrid(items, id: \.element.id) { index, item in
-        ListImageRowItem(item: item, isLoading: .constant(true))
-      }
-      .gridStyle(columns: 2)
-      .scrollOptions(direction: .vertical)
-      .background(
-        GeometryReader {
-          Color.clear.preference(
-            key: ViewOffsetKey.self,
-            value: -$0.frame(in: .named("scroll")).origin.y
-          )
-        }
-      )
-      .onPreferenceChange(ViewOffsetKey.self) { detector.send($0) }
-    }
-    .coordinateSpace(.named("scroll"))
-    .onReceive(publisher) { coordinateY in
-      if coordinateY > 0 {
-        print("Stopped on: \(coordinateY)")
-        viewModel.requestMoreItemsIfNeeded()
-      }
-    }
-    .overlay {
-      if viewModel.dataIsLoading {
-        ProgressView()
-      }
-    }
-  }
-  
-}
-
-struct ViewOffsetKey: PreferenceKey {
-  typealias Value = CGFloat
-  static var defaultValue = CGFloat.zero
-  static func reduce(value: inout Value, nextValue: () -> Value) {
-    value += nextValue()
-  }
-}
+//import SwiftUI
+//import WaterfallGrid
+//import Combine
+//
+//struct InfiniteListView: View {
+//  
+//  let detector: CurrentValueSubject<CGFloat, Never>
+//  let publisher: AnyPublisher<CGFloat, Never>
+//  
+//  @ObservedObject var viewModel: InfiniteListViewModel
+//  
+//  init(viewModel: InfiniteListViewModel) {
+//    self.viewModel = viewModel
+//    viewModel.requestInitialSetOfItems()
+//    
+//    let detector = CurrentValueSubject<CGFloat, Never>(0)
+//    
+//    self.publisher = detector
+//      .debounce(for: .seconds(0.2), scheduler: DispatchQueue.main)
+//      .dropFirst()
+//      .eraseToAnyPublisher()
+//    
+//    self.detector = detector
+//  }
+//  
+//  var body: some View {
+//    let items = $viewModel.imageUrls.enumerated().map { $0 }
+//    
+//    ScrollView(.vertical) {
+//      WaterfallGrid(items, id: \.element.id) { index, item in
+//        ListImageRowItem(item: item, isLoading: .constant(true))
+//      }
+//      .gridStyle(columns: 2)
+//      .scrollOptions(direction: .vertical)
+//      .background(
+//        GeometryReader {
+//          Color.clear.preference(
+//            key: ViewOffsetKey.self,
+//            value: -$0.frame(in: .named("scroll")).origin.y
+//          )
+//        }
+//      )
+//      .onPreferenceChange(ViewOffsetKey.self) { detector.send($0) }
+//    }
+//    .coordinateSpace(.named("scroll"))
+//    .onReceive(publisher) { coordinateY in
+//      if coordinateY > 0 {
+//        print("Stopped on: \(coordinateY)")
+//        viewModel.requestMoreItemsIfNeeded()
+//      }
+//    }
+//    .overlay {
+//      if viewModel.dataIsLoading {
+//        ProgressView()
+//      }
+//    }
+//  }
+//  
+//}
+//
+//struct ViewOffsetKey: PreferenceKey {
+//  typealias Value = CGFloat
+//  static var defaultValue = CGFloat.zero
+//  static func reduce(value: inout Value, nextValue: () -> Value) {
+//    value += nextValue()
+//  }
+//}
 
 //#Preview {
 //  InfiniteListView()

@@ -6,74 +6,325 @@
 //
 
 import SwiftUI
+import WaterfallGrid
 import Combine
 
 struct ContentView: View {
-    @StateObject private var viewModel = ImageLoaderViewModel()
+  @ObservedObject var viewModel: ImageLoaderViewModel
+  
+  //  var body: some View {
+  //    VStack {
+  //      if viewModel.images.isEmpty {
+  //        // Если массив картинок пуст, показываем индикатор загрузки
+  //        ProgressView()
+  //      } else {
+  //        // Иначе отображаем каждую загруженную картинку
+  //        ScrollView {
+  //          ForEach(viewModel.images, id: \.self) { image in
+  //            Image(uiImage: image)
+  //              .resizable()
+  //              .aspectRatio(contentMode: .fit)
+  //              .padding()
+  //          }
+  //        }
+  //      }
+  //    }
+  //    .onAppear {
+  //      // Запускаем загрузку картинок
+  //      viewModel.requestItems(page: 1)
+  //    }
+  //  }
+  
+  
+  
+  
+  let detector: CurrentValueSubject<CGFloat, Never>
+  let publisher: AnyPublisher<CGFloat, Never>
+  
+  init(viewModel: ImageLoaderViewModel) {
+    self.viewModel = viewModel
+    viewModel.requestInitialSetOfItems()
     
-    var body: some View {
-        VStack {
-            if viewModel.images.isEmpty {
-                // Если массив картинок пуст, показываем индикатор загрузки
-                ProgressView()
-            } else {
-                // Иначе отображаем каждую загруженную картинку
-                ScrollView {
-                    ForEach(viewModel.images, id: \.self) { image in
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .padding()
-                    }
-                }
-            }
+    let detector = CurrentValueSubject<CGFloat, Never>(0)
+    
+    self.publisher = detector
+      .debounce(for: .seconds(0.2), scheduler: DispatchQueue.main)
+      .dropFirst()
+      .eraseToAnyPublisher()
+    
+    self.detector = detector
+  }
+  
+  var body: some View {
+    let items = $viewModel.domainImageList.enumerated().map { $0 }
+    
+    ScrollView(.vertical) {
+      VStack {
+        WaterfallGrid(items, id: \.element.id) { index, item in
+          ListImageRowItem(item: item, isLoading: .constant(true))
         }
-        .onAppear {
-            // Запускаем загрузку картинок
-            viewModel.loadImages()
-        }
+        .gridStyle(columns: 2)
+        .scrollOptions(direction: .vertical)
+        .background(
+          GeometryReader {
+            Color.clear.preference(
+              key: ViewOffsetKey.self,
+              value: -$0.frame(in: .named("scroll")).origin.y
+            )
+          }
+
+        )
+        .onPreferenceChange(ViewOffsetKey.self) { detector.send($0) }
+      }
     }
+    .coordinateSpace(.named("scroll"))
+    .onReceive(publisher) { coordinateY in
+      print("coordinateY - \(coordinateY)")
+      
+      if coordinateY > -100 {
+        print("Stopped on: \(coordinateY)")
+        viewModel.requestMoreItemsIfNeeded()
+      }
+    }
+    .overlay {
+      if viewModel.dataIsLoading {
+        ProgressView()
+      }
+    }
+  }
+}
+
+struct ViewOffsetKey: PreferenceKey {
+  typealias Value = CGFloat
+  static var defaultValue = CGFloat.zero
+  static func reduce(value: inout Value, nextValue: () -> Value) {
+    value += nextValue()
+  }
 }
 
 class ImageLoaderViewModel: ObservableObject {
-    @Published var images: [UIImage] = []
-    private var cancellables: Set<AnyCancellable> = []
+  var cancellables = Set<AnyCancellable>()
+  
+  private let itemsFromEndThreshold = 0
+  
+  private var downloadingDataIsAvailable: Bool = true
+  private var itemsLoadedCount: Int?
+  private var currentPage = 0
+  
+  private var canLoadMorePages = true
+  
+  @ObservedObject private var networkService: NetworkService = NetworkService.shared
+  
+  @Published var items: [APIUnsplashItem] = []
+  @Published var dataIsLoading = false
+  
+  
+  
+  @Published var imageUrls: [APIImageResponse] = []
+  @Published var imageList: [Image] = []
+  
+  @Published var domainImageList: [ImageResponseDomain] = []
+  
+  let imageUrlsSubject = CurrentValueSubject<[APIImageResponse], Never>([])
+  
+  
+  
+  @Published var images: [UIImage] = []
+  
+  
+  func requestInitialSetOfItems() {
+    currentPage = 1
+    requestItems(page: currentPage)
+  }
+  /// Used for infinite scrolling. Only requests more items if pagination criteria is met.
+  func requestMoreItemsIfNeeded() {
+    guard downloadingDataIsAvailable else {
+      return
+    }
     
-    func loadImages() {
-        let imageURLs: [URL] = [
-            URL(string: "https://images.unsplash.com/photo-1682685797507-d44d838b0ac7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MzF8MXwxfGFsbHwxfHx8fHx8Mnx8MTY5ODE1MDE0Nnw&ixlib=rb-4.0.3&q=80&w=1080")!,
-            URL(string: "https://images.unsplash.com/photo-1697572801935-60d4a28a861b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MzF8MHwxfGFsbHwyfHx8fHx8Mnx8MTY5ODE1MDE0Nnw&ixlib=rb-4.0.3&q=80&w=1080")!,
-            URL(string: "https://images.unsplash.com/photo-1697723678949-5184d37f11ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MzF8MHwxfGFsbHwzfHx8fHx8Mnx8MTY5ODE1MDE0Nnw&ixlib=rb-4.0.3&q=80&w=1080")!,
-            URL(string: "https://images.unsplash.com/photo-1697644371824-41d4d0a8a12f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MzF8MHwxfGFsbHw0fHx8fHx8Mnx8MTY5ODE1MDE0Nnw&ixlib=rb-4.0.3&q=80&w=1080")!,
-            URL(string: "https://images.unsplash.com/photo-1697723831958-63bbdbe09962?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MzF8MHwxfGFsbHw1fHx8fHx8Mnx8MTY5ODE1MDE0Nnw&ixlib=rb-4.0.3&q=80&w=1080")!,
-            URL(string: "https://images.unsplash.com/photo-1682687981807-35e55307a7bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MzF8MXwxfGFsbHw2fHx8fHx8Mnx8MTY5ODE1MDE0Nnw&ixlib=rb-4.0.3&q=80&w=1080")!,
-            URL(string: "https://images.unsplash.com/photo-1697519754376-5652952107b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MzF8MHwxfGFsbHw3fHx8fHx8Mnx8MTY5ODE1MDE0Nnw&ixlib=rb-4.0.3&q=80&w=1080")!,
-            URL(string: "https://images.unsplash.com/photo-1697506788707-53f5b1a1f1f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MzF8MHwxfGFsbHw4fHx8fHx8Mnx8MTY5ODE1MDE0Nnw&ixlib=rb-4.0.3&q=80&w=1080")!
-        ]
-        
-        // Создаем массив из сетевых запросов
-        let imageLoaders = imageURLs.map { url -> AnyPublisher<UIImage?, Never> in
-            URLSession.shared.dataTaskPublisher(for: url)
-                .map { data, _ -> UIImage? in UIImage(data: data) }
-                .catch { _ in Just(nil) }
-                .eraseToAnyPublisher()
+    currentPage += 1
+    requestItems(page: currentPage)
+  }
+  
+  
+  
+  func requestItems(page: Int) {
+    guard !dataIsLoading && canLoadMorePages else {
+      return
+    }
+    
+    downloadingDataIsAvailable = false
+    dataIsLoading = true
+    
+    //      await networkService.loadMoreContent(page: page)
+    //        .receive(on: RunLoop.main)
+    //        .sink(
+    //          receiveCompletion: { error in
+    //            print("\(error)")
+    //          },
+    //          receiveValue: { [weak self] response in
+    //            guard let self = self, let response = response else {
+    //              return
+    //            }
+    //
+    //            self.canLoadMorePages = response.hasMorePages
+    //            self.dataIsLoading = false
+    //
+    //            self.items.append(contentsOf: response.items)
+    //            self.itemsLoadedCount = self.items.count
+    //          }
+    //        )
+    //        .store(in: &cancellables)
+    
+    
+    
+    
+    
+    networkService.loadImages(page: page)
+      .receive(on: RunLoop.main)
+      .sink(
+        receiveCompletion: { error in
+          print("\(error)")
+        },
+        receiveValue: { [weak self] response in
+          guard let self = self else {
+            return
+          }
+          
+          
+          
+          self.imageUrls += response.map { $0 }
+          
+          self.downloadingDataIsAvailable = true
+          
+          self.imageUrlsSubject.send(response)
+          
+          print("imageUrls.count = \(imageUrls.count)")
+        }
+      )
+      .store(in: &cancellables)
+    
+    imageUrlsSubject
+      .flatMap { [weak self] imagesArray -> AnyPublisher<[ImageResponseDomain], Error> in
+        guard let self = self else {
+          return Empty(completeImmediately: false).eraseToAnyPublisher()
         }
         
-        // Комбинируем все сетевые запросы в один массив картинок
-        Publishers.Sequence(sequence: imageLoaders)
-            .flatMap { $0 }
-            .compactMap { $0 }
-            .collect()
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] images in
-                self?.images = images
-            }
-            .store(in: &cancellables)
-    }
+        return self.networkService.loadImages(responseArray: imagesArray)
+      }
+      .receive(on: RunLoop.main)
+      .sink(
+        receiveCompletion: { error in
+          print("\(error)")
+        },
+        receiveValue: { [weak self] images in
+          guard let self = self else {
+            return
+          }
+          
+          self.dataIsLoading = false
+          
+          print("сработал subject, images.count = \(images.count)")
+          
+          self.domainImageList += images
+        }
+      )
+      .store(in: &cancellables)
+  }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+
+
+
+
+
+
+
+
+//struct GridItem: Identifiable {
+//  
+//  let id = UUID()
+//  let height: CGFloat
+//  let title: String
+//  
+//}
+//
+//
+//struct InfiniteListView: View {
+//  
+//  struct Column: Identifiable {
+//    
+//    let id = UUID()
+//    var gridItems = [GridItem]()
+//    
+//  }
+//  
+//  let columns: [Column]
+//  
+//  let spacing: CGFloat
+//  let horizontalPadding: CGFloat
+//  
+//  @State private var image: [Image] = []
+//  
+//  @ObservedObject var viewModel: InfiniteListViewModel
+//  
+//  init(
+//    viewModel: InfiniteListViewModel,
+//    numberOfColumns: Int,
+//    spacing: CGFloat = 20,
+//    horizontalPadding: CGFloat = 20
+//  ) {
+//    self.spacing = spacing
+//    self.horizontalPadding = horizontalPadding
+//    
+//    var columns = [Column]()
+//    
+//    for _ in 0 ..< numberOfColumns {
+//      columns.append(Column())
+//    }
+//    
+//    var columnsHeights = Array<CGFloat>(repeating: 0, count: numberOfColumns)
+//    
+//    for gridItem in gridItems {
+//      var smallestColumnIndex = 0
+//      var smallestHeight = columnsHeights.first!
+//      
+//      for i in 1 ..< columnsHeights.count {
+//        let curHeight = columnsHeights[i]
+//        
+//        if curHeight < smallestHeight {
+//          smallestHeight = curHeight
+//          smallestColumnIndex = i
+//        }
+//      }
+//      
+//      columns[smallestColumnIndex].gridItems.append(gridItem)
+//      columnsHeights[smallestColumnIndex] += gridItem.height
+//    }
+//    
+//    self.columns = columns
+//    
+//    self.viewModel = viewModel
+//    viewModel.requestInitialSetOfItems()
+//  }
+//  
+//  var body: some View {
+//    HStack(alignment: .top, spacing: spacing) {
+//      ForEach(columns) { column in
+//        LazyVStack(spacing: spacing) {
+//          ForEach (column.gridItems) { gridItem in
+//            Rectangle()
+//              .foregroundStyle(.blue)
+//              .frame(height: gridItem.height)
+//              .overlay(
+//                Text(gridItem.title)
+//                  .font(.system(size: 30, weight: .bold))
+//              )
+//          }
+//        }
+//      }
+//    }
+//    .padding(.horizontal, horizontalPadding)
+//  }
+//  
+//}

@@ -40,7 +40,7 @@ class NetworkService: ObservableObject {
       .eraseToAnyPublisher()
   }
   
-  func loadImages(page: Int) async -> AnyPublisher<[APIImageResponse], Error> {
+  func loadImages(page: Int) -> AnyPublisher<[APIImageResponse], Error> {
     let url = URL(string: "https://api.unsplash.com/photos?page=\(page)&client_id=Ad3y-sB1XiKe0Q0nJITelHrKFrDbGr1h5iUpjJadDAE")!
     
     return URLSession.shared.dataTaskPublisher(for: url)
@@ -90,11 +90,61 @@ class NetworkService: ObservableObject {
       .eraseToAnyPublisher()
   }
   
+  
+  
+  
+  
+  
+  
+  func loadImages(responseArray: [APIImageResponse]) -> AnyPublisher<[ImageResponseDomain], Error> {
+    // Создаем массив из сетевых запросов
+    let imageLoaders = responseArray.enumerated().map { index, imageRsponse -> AnyPublisher<ImageResponseDomain?, Never> in
+      guard let url = URL(string: imageRsponse.imageUrls.regular) else {
+        return Empty(completeImmediately: false).eraseToAnyPublisher()
+      }
+      
+      return URLSession.shared.dataTaskPublisher(for: url)
+        .map { data, _ -> ImageResponseDomain? in
+          guard let uiImage = UIImage(data: data) else {
+            return nil
+          }
+          
+          return ImageResponseDomain(image: uiImage, imageAPIResponse: responseArray[index])
+          
+        }
+        .catch { _ in Just(nil) }
+        .eraseToAnyPublisher()
+    }
+    
+    // Комбинируем все сетевые запросы в один массив картинок
+    return Publishers.Sequence(sequence: imageLoaders)
+      .flatMap { $0 }
+      .compactMap { $0 }
+      .collect()
+//      .receive(on: DispatchQueue.main)
+      .eraseToAnyPublisher()
+//      .sink { [weak self] images in
+//        self?.images = images
+//      }
+//      .store(in: &cancellables)
+  }
+  
 }
 
 enum APIError: Error {
   
     case invalidResponse
     case invalidData
+  
+}
+
+struct ImageResponseDomain: Identifiable {
+  
+  let image: UIImage
+  let imageAPIResponse: APIImageResponse
+  
+  var id: String {
+    imageAPIResponse.id
+  }
   
 }

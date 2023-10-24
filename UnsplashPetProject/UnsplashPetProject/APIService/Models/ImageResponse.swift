@@ -5,7 +5,7 @@
 //  Created by Sergey on 09.10.2023.
 //
 
-struct APIImageResponse: Codable, Identifiable {
+struct APIImageResponse: Codable {
   
     let id, slug: String
     let createdAt, updatedAt: String

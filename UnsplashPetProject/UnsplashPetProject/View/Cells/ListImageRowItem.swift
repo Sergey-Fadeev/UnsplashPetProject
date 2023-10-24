@@ -10,30 +10,16 @@ import Combine
 
 struct ListImageRowItem: View {
   
-  @Binding var item: APIImageResponse
+  @Binding var item: ImageResponseDomain
   @Binding var isLoading: Bool
   
     var body: some View {
 //      AsyncImage(url: URL(string: item.imageUrls.small))
 //        .frame(width: 50, height: 50)
       
-      print("url - \(item.imageUrls.regular)")
-      
-      
-      return AsyncImage(
-        url: URL(string: item.imageUrls.regular),
-        content: { image in
-          image
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-        },
-        placeholder: {
-          ProgressView()
-        }
-      )
-      .onAppear {
-        isLoading = false
-    }
+      Image(uiImage: item.image)
+        .resizable()
+        .aspectRatio(contentMode: .fit)
       
       
       
