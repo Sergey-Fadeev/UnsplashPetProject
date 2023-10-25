@@ -10,14 +10,14 @@ import Combine
 
 struct ListImageRowItem: View {
   
-  @Binding var item: ImageResponseDomain
+  @Binding var item: GridItem
   @Binding var isLoading: Bool
   
     var body: some View {
 //      AsyncImage(url: URL(string: item.imageUrls.small))
 //        .frame(width: 50, height: 50)
       
-      Image(uiImage: item.image)
+      Image(uiImage: item.uiImage)
         .resizable()
         .aspectRatio(contentMode: .fit)
       

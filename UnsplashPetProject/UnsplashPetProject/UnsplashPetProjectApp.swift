@@ -11,9 +11,9 @@ import SwiftUI
 struct UnsplashPetProjectApp: App {
     var body: some Scene {
       WindowGroup {
-//        InfiniteListView(viewModel: InfiniteListViewModel())
+        InfiniteListView2(viewModel: ImageLoaderViewModel())
         
-        ContentView(viewModel: ImageLoaderViewModel())
+//        ContentView(viewModel: ImageLoaderViewModel())
       }
     }
 }

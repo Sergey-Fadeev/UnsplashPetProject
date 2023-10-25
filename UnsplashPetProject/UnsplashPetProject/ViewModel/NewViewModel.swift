@@ -9,90 +9,90 @@ import SwiftUI
 import WaterfallGrid
 import Combine
 
-struct ContentView: View {
-  @ObservedObject var viewModel: ImageLoaderViewModel
-  
-  //  var body: some View {
-  //    VStack {
-  //      if viewModel.images.isEmpty {
-  //        // Если массив картинок пуст, показываем индикатор загрузки
-  //        ProgressView()
-  //      } else {
-  //        // Иначе отображаем каждую загруженную картинку
-  //        ScrollView {
-  //          ForEach(viewModel.images, id: \.self) { image in
-  //            Image(uiImage: image)
-  //              .resizable()
-  //              .aspectRatio(contentMode: .fit)
-  //              .padding()
-  //          }
-  //        }
-  //      }
-  //    }
-  //    .onAppear {
-  //      // Запускаем загрузку картинок
-  //      viewModel.requestItems(page: 1)
-  //    }
-  //  }
-  
-  
-  
-  
-  let detector: CurrentValueSubject<CGFloat, Never>
-  let publisher: AnyPublisher<CGFloat, Never>
-  
-  init(viewModel: ImageLoaderViewModel) {
-    self.viewModel = viewModel
-    viewModel.requestInitialSetOfItems()
-    
-    let detector = CurrentValueSubject<CGFloat, Never>(0)
-    
-    self.publisher = detector
-      .debounce(for: .seconds(0.2), scheduler: DispatchQueue.main)
-      .dropFirst()
-      .eraseToAnyPublisher()
-    
-    self.detector = detector
-  }
-  
-  var body: some View {
-    let items = $viewModel.domainImageList.enumerated().map { $0 }
-    
-    ScrollView(.vertical) {
-      VStack {
-        WaterfallGrid(items, id: \.element.id) { index, item in
-          ListImageRowItem(item: item, isLoading: .constant(true))
-        }
-        .gridStyle(columns: 2)
-        .scrollOptions(direction: .vertical)
-        .background(
-          GeometryReader {
-            Color.clear.preference(
-              key: ViewOffsetKey.self,
-              value: -$0.frame(in: .named("scroll")).origin.y
-            )
-          }
-
-        )
-        .onPreferenceChange(ViewOffsetKey.self) { detector.send($0) }
-      }
-    }
-    .coordinateSpace(.named("scroll"))
-    .onReceive(publisher) { coordinateY in
-      print("coordinateY - \(coordinateY)")
-      
-      if coordinateY > -100 {
-        print("Stopped on: \(coordinateY)")
-        viewModel.requestMoreItemsIfNeeded()
-      }
-    }
-    .overlay {
-      if viewModel.dataIsLoading {
-        ProgressView()
-      }
-    }
-  }
-}
+//struct ContentView: View {
+//  @ObservedObject var viewModel: ImageLoaderViewModel
+//  
+//  //  var body: some View {
+//  //    VStack {
+//  //      if viewModel.images.isEmpty {
+//  //        // Если массив картинок пуст, показываем индикатор загрузки
+//  //        ProgressView()
+//  //      } else {
+//  //        // Иначе отображаем каждую загруженную картинку
+//  //        ScrollView {
+//  //          ForEach(viewModel.images, id: \.self) { image in
+//  //            Image(uiImage: image)
+//  //              .resizable()
+//  //              .aspectRatio(contentMode: .fit)
+//  //              .padding()
+//  //          }
+//  //        }
+//  //      }
+//  //    }
+//  //    .onAppear {
+//  //      // Запускаем загрузку картинок
+//  //      viewModel.requestItems(page: 1)
+//  //    }
+//  //  }
+//  
+//  
+//  
+//  
+//  let detector: CurrentValueSubject<CGFloat, Never>
+//  let publisher: AnyPublisher<CGFloat, Never>
+//  
+//  init(viewModel: ImageLoaderViewModel) {
+//    self.viewModel = viewModel
+//    viewModel.requestInitialSetOfItems()
+//    
+//    let detector = CurrentValueSubject<CGFloat, Never>(0)
+//    
+//    self.publisher = detector
+//      .debounce(for: .seconds(0.2), scheduler: DispatchQueue.main)
+//      .dropFirst()
+//      .eraseToAnyPublisher()
+//    
+//    self.detector = detector
+//  }
+//  
+//  var body: some View {
+//    let items = $viewModel.domainImageList.enumerated().map { $0 }
+//    
+//    ScrollView(.vertical) {
+//      VStack {
+//        WaterfallGrid(items, id: \.element.id) { index, item in
+//          ListImageRowItem(item: item, isLoading: .constant(true))
+//        }
+//        .gridStyle(columns: 2)
+//        .scrollOptions(direction: .vertical)
+//        .background(
+//          GeometryReader {
+//            Color.clear.preference(
+//              key: ViewOffsetKey.self,
+//              value: -$0.frame(in: .named("scroll")).origin.y
+//            )
+//          }
+//
+//        )
+//        .onPreferenceChange(ViewOffsetKey.self) { detector.send($0) }
+//      }
+//    }
+//    .coordinateSpace(.named("scroll"))
+//    .onReceive(publisher) { coordinateY in
+//      print("coordinateY - \(coordinateY)")
+//      
+//      if coordinateY > -100 {
+//        print("Stopped on: \(coordinateY)")
+//        viewModel.requestMoreItemsIfNeeded()
+//      }
+//    }
+//    .overlay {
+//      if viewModel.dataIsLoading {
+//        ProgressView()
+//      }
+//    }
+//  }
+//}
 
 struct ViewOffsetKey: PreferenceKey {
   typealias Value = CGFloat
@@ -130,6 +130,11 @@ class ImageLoaderViewModel: ObservableObject {
   
   
   @Published var images: [UIImage] = []
+  
+  
+  @Published var columns: [Column] = [Column(), Column()]
+  var leftHeight: Double = 0
+  var rightHeight: Double = 0
   
   
   func requestInitialSetOfItems() {
@@ -224,9 +229,71 @@ class ImageLoaderViewModel: ObservableObject {
           
           self.dataIsLoading = false
           
-          print("сработал subject, images.count = \(images.count)")
+          let gridItems = images.map { response in
+            var isVertical: Bool = true
+            var ratio: Double = 0
+            var height: Double = 0
+            
+            if response.image.size.height > response.image.size.width {
+              isVertical = true
+              ratio = response.image.size.height / response.image.size.width
+              height = ((UIScreen.main.bounds.width - 60.0) / 2.0) * ratio
+            } else {
+              isVertical = false
+              ratio = response.image.size.width / response.image.size.height
+              height = (UIScreen.main.bounds.width - 60.0) / 2.0
+            }
+            
+            return GridItem(
+              isVertical: isVertical,
+              ratio: ratio, 
+              height: height,
+              title: response.imageAPIResponse.altDescription ?? "",
+              uiImage: response.image
+            )
+          }
           
-          self.domainImageList += images
+          var columns: [Column] = [Column(), Column()]
+          var leftHeights: Double = self.leftHeight
+          var rightHeights: Double = self.rightHeight
+          
+//          for _ in 0 ..< 2 {
+//            columns.append(Column())
+//          }
+          
+          var columnsHeights = [leftHeights, rightHeights]
+          
+          for gridItem in gridItems {
+            if columnsHeights[0] > columnsHeights[1] {
+              columns[1].gridItems.append(gridItem)
+              columnsHeights[1] += gridItem.height
+            } else {
+              columns[0].gridItems.append(gridItem)
+              columnsHeights[0] += gridItem.height
+            }
+            
+            
+          }
+          
+          self.columns[0].gridItems += columns[0].gridItems
+          self.columns[1].gridItems += columns[1].gridItems
+          self.leftHeight = columnsHeights[0]
+          self.rightHeight = columnsHeights[1]
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+//          print("сработал subject, images.count = \(images.count)")
+//          
+//          self.domainImageList += images
         }
       )
       .store(in: &cancellables)
@@ -241,90 +308,100 @@ class ImageLoaderViewModel: ObservableObject {
 
 
 
-//struct GridItem: Identifiable {
-//  
-//  let id = UUID()
-//  let height: CGFloat
-//  let title: String
-//  
-//}
+struct GridItem: Identifiable {
+  
+  let id = UUID()
+  let isVertical: Bool
+  let ratio: Double
+  let height: Double
+  let title: String
+  let uiImage: UIImage
+  
+}
+
+struct Column: Identifiable {
+  
+  let id = UUID()
+  var gridItems = [GridItem]()
+  
+}
+
+
 //
 //
-//struct InfiniteListView: View {
-//  
-//  struct Column: Identifiable {
-//    
-//    let id = UUID()
-//    var gridItems = [GridItem]()
-//    
-//  }
-//  
-//  let columns: [Column]
-//  
-//  let spacing: CGFloat
-//  let horizontalPadding: CGFloat
-//  
-//  @State private var image: [Image] = []
-//  
-//  @ObservedObject var viewModel: InfiniteListViewModel
-//  
-//  init(
-//    viewModel: InfiniteListViewModel,
-//    numberOfColumns: Int,
-//    spacing: CGFloat = 20,
-//    horizontalPadding: CGFloat = 20
-//  ) {
-//    self.spacing = spacing
-//    self.horizontalPadding = horizontalPadding
-//    
-//    var columns = [Column]()
-//    
-//    for _ in 0 ..< numberOfColumns {
-//      columns.append(Column())
-//    }
-//    
-//    var columnsHeights = Array<CGFloat>(repeating: 0, count: numberOfColumns)
-//    
-//    for gridItem in gridItems {
-//      var smallestColumnIndex = 0
-//      var smallestHeight = columnsHeights.first!
-//      
-//      for i in 1 ..< columnsHeights.count {
-//        let curHeight = columnsHeights[i]
-//        
-//        if curHeight < smallestHeight {
-//          smallestHeight = curHeight
-//          smallestColumnIndex = i
-//        }
+struct InfiniteListView2: View {
+  
+  struct Column: Identifiable {
+    
+    let id = UUID()
+    var gridItems = [GridItem]()
+    
+  }
+  
+  let spacing: CGFloat
+  let horizontalPadding: CGFloat
+  
+  @State private var image: [Image] = []
+  
+  @ObservedObject var viewModel: ImageLoaderViewModel
+  
+  init(
+    viewModel: ImageLoaderViewModel,
+    spacing: CGFloat = 20,
+    horizontalPadding: CGFloat = 20
+  ) {
+    self.spacing = spacing
+    self.horizontalPadding = horizontalPadding
+    
+    self.viewModel = viewModel
+    viewModel.requestInitialSetOfItems()
+  }
+  
+  var body: some View {
+    ScrollView {
+      HStack(alignment: .top, spacing: spacing) {
+        ForEach(viewModel.columns) { column in
+          LazyVStack(spacing: spacing) {
+            ForEach (column.gridItems) { gridItem in
+              ListImageRowItem(item: .constant(gridItem), isLoading: .constant(true))
+            }
+            
+            GeometryReader { geometry in
+              Color.clear.preference(key: ViewOffsetKey.self, value: geometry.frame(in: .named("scrollView")).minY)
+            }
+            .frame(height: 0)
+          }
+        }
+      }
+      .padding(.horizontal, horizontalPadding)
+    }
+    .coordinateSpace(name: "scrollView")
+    .onPreferenceChange(ViewOffsetKey.self) { minY in
+      if minY > -50 {
+        viewModel.requestMoreItemsIfNeeded()
+      }
+    }
+  }
+  
+}
+
+//NavigationView {
+//  ScrollView {
+//    LazyVStack {
+//      ForEach(viewModel.images, id: \.self) { url in
+//        AsyncImage(url: url)
 //      }
 //      
-//      columns[smallestColumnIndex].gridItems.append(gridItem)
-//      columnsHeights[smallestColumnIndex] += gridItem.height
-//    }
-//    
-//    self.columns = columns
-//    
-//    self.viewModel = viewModel
-//    viewModel.requestInitialSetOfItems()
-//  }
-//  
-//  var body: some View {
-//    HStack(alignment: .top, spacing: spacing) {
-//      ForEach(columns) { column in
-//        LazyVStack(spacing: spacing) {
-//          ForEach (column.gridItems) { gridItem in
-//            Rectangle()
-//              .foregroundStyle(.blue)
-//              .frame(height: gridItem.height)
-//              .overlay(
-//                Text(gridItem.title)
-//                  .font(.system(size: 30, weight: .bold))
-//              )
-//          }
-//        }
+//      GeometryReader { geometry in
+//        Color.clear.preference(key: ViewOffsetKey.self, value: geometry.frame(in: .named("scrollView")).minY)
 //      }
+//      .frame(height: 0)
 //    }
-//    .padding(.horizontal, horizontalPadding)
 //  }
-//  
+//  .coordinateSpace(name: "scrollView")
+//  .onPreferenceChange(ViewOffsetKey.self) { minY in
+//    if minY > -50 {
+//      viewModel.loadMoreImages()
+//    }
+//  }
 //}
