@@ -13,14 +13,12 @@
 		895BFBE32AD42867006BBEDC /* UnsplashPetProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFBE22AD42867006BBEDC /* UnsplashPetProjectTests.swift */; };
 		895BFBED2AD42867006BBEDC /* UnsplashPetProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFBEC2AD42867006BBEDC /* UnsplashPetProjectUITests.swift */; };
 		895BFBEF2AD42867006BBEDC /* UnsplashPetProjectUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFBEE2AD42867006BBEDC /* UnsplashPetProjectUITestsLaunchTests.swift */; };
-		895BFC032AD42E3C006BBEDC /* InfiniteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFC022AD42E3C006BBEDC /* InfiniteListViewModel.swift */; };
 		895BFC082AD42E85006BBEDC /* APIUnsplashResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFC072AD42E85006BBEDC /* APIUnsplashResponse.swift */; };
 		895BFC0A2AD42EA1006BBEDC /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFC092AD42EA1006BBEDC /* NetworkService.swift */; };
-		895BFC0E2AD42EE0006BBEDC /* InfiniteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFC0D2AD42EE0006BBEDC /* InfiniteListView.swift */; };
 		895BFC102AD42EFE006BBEDC /* ListItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFC0F2AD42EFE006BBEDC /* ListItemRowView.swift */; };
 		895BFC122AD43741006BBEDC /* ImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFC112AD43741006BBEDC /* ImageResponse.swift */; };
 		89C0D1332AD54B2900FDCDD5 /* ListImageRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C0D1322AD54B2900FDCDD5 /* ListImageRowItem.swift */; };
-		89C0D1362AD551B500FDCDD5 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 89C0D1352AD551B500FDCDD5 /* WaterfallGrid */; };
+		89C232BA2AE9061D001778D9 /* InfiniteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C232B92AE9061D001778D9 /* InfiniteListView.swift */; };
 		89E677BF2AE7EF910008C06D /* NewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E677BE2AE7EF910008C06D /* NewViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,13 +49,12 @@
 		895BFBE82AD42867006BBEDC /* UnsplashPetProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnsplashPetProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		895BFBEC2AD42867006BBEDC /* UnsplashPetProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashPetProjectUITests.swift; sourceTree = "<group>"; };
 		895BFBEE2AD42867006BBEDC /* UnsplashPetProjectUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashPetProjectUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		895BFC022AD42E3C006BBEDC /* InfiniteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteListViewModel.swift; sourceTree = "<group>"; };
 		895BFC072AD42E85006BBEDC /* APIUnsplashResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUnsplashResponse.swift; sourceTree = "<group>"; };
 		895BFC092AD42EA1006BBEDC /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		895BFC0D2AD42EE0006BBEDC /* InfiniteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteListView.swift; sourceTree = "<group>"; };
 		895BFC0F2AD42EFE006BBEDC /* ListItemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemRowView.swift; sourceTree = "<group>"; };
 		895BFC112AD43741006BBEDC /* ImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResponse.swift; sourceTree = "<group>"; };
 		89C0D1322AD54B2900FDCDD5 /* ListImageRowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListImageRowItem.swift; sourceTree = "<group>"; };
+		89C232B92AE9061D001778D9 /* InfiniteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteListView.swift; sourceTree = "<group>"; };
 		89E677BE2AE7EF910008C06D /* NewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,7 +63,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89C0D1362AD551B500FDCDD5 /* WaterfallGrid in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				89E677BE2AE7EF910008C06D /* NewViewModel.swift */,
-				895BFC022AD42E3C006BBEDC /* InfiniteListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -183,8 +178,8 @@
 		895BFC0B2AD42EB7006BBEDC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				895BFC0D2AD42EE0006BBEDC /* InfiniteListView.swift */,
 				895BFC0C2AD42ECF006BBEDC /* Cells */,
+				89C232B92AE9061D001778D9 /* InfiniteListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -215,7 +210,6 @@
 			);
 			name = UnsplashPetProject;
 			packageProductDependencies = (
-				89C0D1352AD551B500FDCDD5 /* WaterfallGrid */,
 			);
 			productName = UnsplashPetProject;
 			productReference = 895BFBCE2AD42865006BBEDC /* UnsplashPetProject.app */;
@@ -290,7 +284,6 @@
 			);
 			mainGroup = 895BFBC52AD42865006BBEDC;
 			packageReferences = (
-				89C0D1342AD551B500FDCDD5 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
 			);
 			productRefGroup = 895BFBCF2AD42865006BBEDC /* Products */;
 			projectDirPath = "";
@@ -335,14 +328,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				89E677BF2AE7EF910008C06D /* NewViewModel.swift in Sources */,
-				895BFC0E2AD42EE0006BBEDC /* InfiniteListView.swift in Sources */,
-				895BFC032AD42E3C006BBEDC /* InfiniteListViewModel.swift in Sources */,
 				895BFC122AD43741006BBEDC /* ImageResponse.swift in Sources */,
 				895BFC102AD42EFE006BBEDC /* ListItemRowView.swift in Sources */,
 				895BFC082AD42E85006BBEDC /* APIUnsplashResponse.swift in Sources */,
 				895BFC0A2AD42EA1006BBEDC /* NetworkService.swift in Sources */,
 				895BFBD22AD42865006BBEDC /* UnsplashPetProjectApp.swift in Sources */,
 				89C0D1332AD54B2900FDCDD5 /* ListImageRowItem.swift in Sources */,
+				89C232BA2AE9061D001778D9 /* InfiniteListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,25 +666,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		89C0D1342AD551B500FDCDD5 /* XCRemoteSwiftPackageReference "WaterfallGrid" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/paololeonardi/WaterfallGrid";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		89C0D1352AD551B500FDCDD5 /* WaterfallGrid */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 89C0D1342AD551B500FDCDD5 /* XCRemoteSwiftPackageReference "WaterfallGrid" */;
-			productName = WaterfallGrid;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 895BFBC62AD42865006BBEDC /* Project object */;
 }

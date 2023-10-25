@@ -41,8 +41,6 @@ class NetworkService: ObservableObject {
   }
   
   func loadImages(page: Int) -> AnyPublisher<[APIImageResponse], Error> {
-    print("page - \(page)")
-    
     let url = URL(string: "https://api.unsplash.com/photos?page=\(page)&client_id=Ad3y-sB1XiKe0Q0nJITelHrKFrDbGr1h5iUpjJadDAE")!
     
     return URLSession.shared.dataTaskPublisher(for: url)
@@ -101,7 +99,7 @@ class NetworkService: ObservableObject {
   func loadImages(responseArray: [APIImageResponse]) -> AnyPublisher<[ImageResponseDomain], Error> {
     // Создаем массив из сетевых запросов
     let imageLoaders = responseArray.enumerated().map { index, imageRsponse -> AnyPublisher<ImageResponseDomain?, Never> in
-      guard let url = URL(string: imageRsponse.imageUrls.regular) else {
+      guard let url = URL(string: imageRsponse.imageUrls.small) else {
         return Empty(completeImmediately: false).eraseToAnyPublisher()
       }
       
