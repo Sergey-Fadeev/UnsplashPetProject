@@ -35,21 +35,13 @@ struct Column: Identifiable {
 
 struct InfiniteListView: View {
   
-  let spacing: CGFloat
-  let horizontalPadding: CGFloat
-  
   @State private var image: [Image] = []
   
   @ObservedObject var viewModel: ImageLoaderViewModel
   
   init(
-    viewModel: ImageLoaderViewModel,
-    spacing: CGFloat = 20,
-    horizontalPadding: CGFloat = 20
+    viewModel: ImageLoaderViewModel
   ) {
-    self.spacing = spacing
-    self.horizontalPadding = horizontalPadding
-    
     self.viewModel = viewModel
     viewModel.bind()
     viewModel.requestInitialSetOfItems()
@@ -57,11 +49,14 @@ struct InfiniteListView: View {
   
   var body: some View {
     ScrollView {
-      HStack(alignment: .top, spacing: spacing) {
+      HStack(alignment: .top, spacing: Constants.imageSpacing) {
         ForEach(viewModel.columns) { column in
-          LazyVStack(spacing: spacing) {
+          LazyVStack(spacing: Constants.imageSpacing) {
             ForEach (column.gridItems) { gridItem in
-              ListImageRowItem(item: .constant(gridItem), isLoading: .constant(true))
+              Image(uiImage: gridItem.uiImage)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .cornerRadius(12)
             }
             
             GeometryReader { geometry in
@@ -71,7 +66,7 @@ struct InfiniteListView: View {
           }
         }
       }
-      .padding(.horizontal, horizontalPadding)
+      .padding(.horizontal, Constants.imageHorizontalPadding)
     }
     .overlay {
       if viewModel.dataIsLoading {
