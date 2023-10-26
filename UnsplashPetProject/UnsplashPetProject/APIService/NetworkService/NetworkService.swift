@@ -16,8 +16,16 @@ class NetworkService: ObservableObject {
   
   private init() { }
   
-  func loadImages(page: Int) -> AnyPublisher<[APIImageResponse], Error> {
-    let url = URL(string: "\(Constants.baseURL)/photos?page=\(page)&client_id=Ad3y-sB1XiKe0Q0nJITelHrKFrDbGr1h5iUpjJadDAE")!
+  func loadImages(page: Int, username: String? = nil) -> AnyPublisher<[APIImageResponse], Error> {
+    let apiTarget = DefaulAPITarget.loadImages(
+      LoadPageRequest(
+        page: page,
+        clientId: "Ad3y-sB1XiKe0Q0nJITelHrKFrDbGr1h5iUpjJadDAE",
+        username: username
+      )
+    )
+    
+    let url = URL(string: apiTarget.fullUrlString)!
     
     return URLSession.shared.dataTaskPublisher(for: url)
       .subscribe(on: DispatchQueue.global())
@@ -68,6 +76,26 @@ class NetworkService: ObservableObject {
       .flatMap { $0 }
       .compactMap { $0 }
       .collect()
+      .eraseToAnyPublisher()
+  }
+  
+  func loadImage(urlString: String) -> AnyPublisher<Data, Error> {
+    guard let url = URL(string: urlString) else {
+      return Empty(completeImmediately: false).eraseToAnyPublisher()
+    }
+    
+    return URLSession.shared.dataTaskPublisher(for: url)
+      .tryMap { data, response -> Data in
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw APIError.invalidResponse
+        }
+        
+        guard (200...299).contains(httpResponse.statusCode) else {
+          throw NSError(domain: httpResponse.debugDescription, code: httpResponse.statusCode)
+        }
+        
+        return data
+      }
       .eraseToAnyPublisher()
   }
   

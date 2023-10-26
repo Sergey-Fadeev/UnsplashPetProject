@@ -11,7 +11,7 @@ import SwiftUI
 struct UnsplashPetProjectApp: App {
     var body: some Scene {
       WindowGroup {
-        InfiniteListView(viewModel: ImageLoaderViewModel(networkService: NetworkService.shared))
+        MainScreenView(viewModel: MainScreenViewModel(networkService: NetworkService.shared))
       }
     }
 }

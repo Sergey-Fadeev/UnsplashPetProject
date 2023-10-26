@@ -1,37 +1,26 @@
 //
-//  NewViewModel.swift
+//  ImageLoaderViewModel.swift
 //  UnsplashPetProject
 //
 //  Created by Sergey on 24.10.2023.
 //
 
 import SwiftUI
-import WaterfallGrid
 import Combine
 
-class ImageLoaderViewModel: ObservableObject {
+class MainScreenViewModel: ObservableObject {
   
   @Published var columns: [Column] = [Column(), Column()]
   @Published var dataIsLoading = false
   
-  var cancellables = Set<AnyCancellable>()
+  private let imageUrlsSubject = CurrentValueSubject<[APIImageResponse], Never>([])
   
-//  private var downloadingDataIsAvailable: Bool = true
   private var currentPage = 0
+  private var leftHeight: Double = 0
+  private var rightHeight: Double = 0
   
-  private var networkService: NetworkService
-  
-  
-  
-  
-  
-  private var imageUrls: [APIImageResponse] = []
-  
-  let imageUrlsSubject = CurrentValueSubject<[APIImageResponse], Never>([])
-  
-  
-  var leftHeight: Double = 0
-  var rightHeight: Double = 0
+  private var cancellables = Set<AnyCancellable>()
+  var networkService: NetworkService
   
   init(networkService: NetworkService) {
     self.networkService = networkService
@@ -40,8 +29,6 @@ class ImageLoaderViewModel: ObservableObject {
   func requestInitialSetOfItems() {
     currentPage = 1
     requestItems(page: currentPage)
-    
-    print("вызван requestInitial")
   }
   
   func requestMoreItemsIfNeeded() {
@@ -82,26 +69,23 @@ class ImageLoaderViewModel: ObservableObject {
       }
       .flatMap { images -> AnyPublisher<([Column], [Double]), Never> in
         let gridItems = images.map { response in
-          var isVertical: Bool = true
           var ratio: Double = 0
           var height: Double = 0
           
           if response.image.size.height > response.image.size.width {
-            isVertical = true
             ratio = response.image.size.height / response.image.size.width
             height = (UIScreen.main.bounds.width - Constants.imageHorizontalPadding * 3 / 2.0) * ratio
           } else {
-            isVertical = false
             ratio = response.image.size.width / response.image.size.height
             height = UIScreen.main.bounds.width - Constants.imageSpacing * 3 / 2.0
           }
           
           return GridItem(
-            isVertical: isVertical,
             ratio: ratio,
             height: height,
             title: response.imageAPIResponse.altDescription ?? "",
-            uiImage: response.image
+            uiImage: response.image,
+            imageInfo: response.imageAPIResponse
           )
         }
         
