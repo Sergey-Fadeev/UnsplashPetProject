@@ -14,7 +14,7 @@ class NetworkService: ObservableObject {
   
   private init() { }
   
-  func loadImages(page: Int, username: String? = nil) -> AnyPublisher<[APIImageResponse], Error> {
+  func loadImages(page: Int, username: String? = nil) -> AnyPublisher<[DomainImageResponse], Error> {
     let apiTarget = DefaulAPITarget.loadImages(
       LoadPageRequest(page: page, username: username)
     )
@@ -25,7 +25,7 @@ class NetworkService: ObservableObject {
       .subscribe(on: DispatchQueue.global())
       .tryMap { data, response -> Data in
         guard let httpResponse = response as? HTTPURLResponse else {
-            throw APIError.invalidResponse
+          throw NSError.APIError.invalidResponse
         }
         
         guard (200...299).contains(httpResponse.statusCode) else {
@@ -40,32 +40,25 @@ class NetworkService: ObservableObject {
           return []
         }
         
-        return response
+        return response.map { $0.asDomain }
       }
       .eraseToAnyPublisher()
   }
   
-  func loadImages(responseArray: [APIImageResponse]) -> AnyPublisher<[ImageResponseDomain], Error> {
-    // Создаем массив из сетевых запросов
-    let imageLoaders = responseArray.enumerated().map { index, imageRsponse -> AnyPublisher<ImageResponseDomain?, Never> in
+  func loadImages(responseArray: [DomainImageResponse]) -> AnyPublisher<[DomainFullInfoImage], Error> {
+    let imageLoaders = responseArray.enumerated().map { index, imageRsponse -> AnyPublisher<DomainFullInfoImage?, Never> in
       guard let url = URL(string: imageRsponse.imageUrls.small) else {
         return Empty(completeImmediately: false).eraseToAnyPublisher()
       }
       
       return URLSession.shared.dataTaskPublisher(for: url)
-        .map { data, _ -> ImageResponseDomain? in
-          guard let uiImage = UIImage(data: data) else {
-            return nil
-          }
-          
-          return ImageResponseDomain(image: uiImage, imageAPIResponse: responseArray[index])
-          
+        .map { data, _ -> DomainFullInfoImage? in
+          DomainFullInfoImage(imageData: data, imageAPIResponse: responseArray[index])
         }
         .catch { _ in Just(nil) }
         .eraseToAnyPublisher()
     }
     
-    // Комбинируем все сетевые запросы в один массив картинок
     return Publishers.Sequence(sequence: imageLoaders)
       .flatMap { $0 }
       .compactMap { $0 }
@@ -81,7 +74,7 @@ class NetworkService: ObservableObject {
     return URLSession.shared.dataTaskPublisher(for: url)
       .tryMap { data, response -> Data in
         guard let httpResponse = response as? HTTPURLResponse else {
-            throw APIError.invalidResponse
+          throw NSError.APIError.invalidResponse
         }
         
         guard (200...299).contains(httpResponse.statusCode) else {
@@ -91,24 +84,6 @@ class NetworkService: ObservableObject {
         return data
       }
       .eraseToAnyPublisher()
-  }
-  
-}
-
-enum APIError: Error {
-  
-    case invalidResponse
-    case invalidData
-  
-}
-
-struct ImageResponseDomain: Identifiable {
-  
-  let image: UIImage
-  let imageAPIResponse: APIImageResponse
-  
-  var id: String {
-    imageAPIResponse.id
   }
   
 }

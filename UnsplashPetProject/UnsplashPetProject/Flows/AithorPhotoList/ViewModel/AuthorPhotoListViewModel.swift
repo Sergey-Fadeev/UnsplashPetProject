@@ -16,7 +16,7 @@ class AuthorPhotoListViewModel: ObservableObject {
   @Published var error: Error?
   @Published var isShowingError = false
   
-  private let imageUrlsSubject = CurrentValueSubject<[APIImageResponse], Never>([])
+  private let imageUrlsSubject = CurrentValueSubject<[DomainImageResponse], Never>([])
   
   private var currentPage = 0
   private var leftHeight: Double = 0
@@ -24,9 +24,9 @@ class AuthorPhotoListViewModel: ObservableObject {
   
   private var cancellables = Set<AnyCancellable>()
   var networkService: NetworkService
-  var imageInfo: APIImageResponse
+  var imageInfo: DomainImageResponse
   
-  init(networkService: NetworkService, imageInfo: APIImageResponse) {
+  init(networkService: NetworkService, imageInfo: DomainImageResponse) {
     self.networkService = networkService
     self.imageInfo = imageInfo
     
@@ -77,7 +77,7 @@ class AuthorPhotoListViewModel: ObservableObject {
   
   private func bind() {
     imageUrlsSubject
-      .flatMap { [weak self] imagesArray -> AnyPublisher<[ImageResponseDomain], Error> in
+      .flatMap { [weak self] imagesArray -> AnyPublisher<[DomainFullInfoImage], Error> in
         guard let self = self else {
           return Empty(completeImmediately: false).eraseToAnyPublisher()
         }
@@ -85,15 +85,19 @@ class AuthorPhotoListViewModel: ObservableObject {
         return self.networkService.loadImages(responseArray: imagesArray)
       }
       .flatMap { images -> AnyPublisher<([Column], [Double]), Never> in
-        let gridItems = images.map { response in
+        let gridItems: [GridItem] = images.compactMap { response in
+          guard let uiImage = UIImage(data: response.imageData) else {
+            return nil
+          }
+          
           var ratio: Double = 0
           var height: Double = 0
           
-          if response.image.size.height > response.image.size.width {
-            ratio = response.image.size.height / response.image.size.width
+          if response.imageAPIResponse.height > response.imageAPIResponse.width {
+            ratio = Double(response.imageAPIResponse.height) / Double(response.imageAPIResponse.width)
             height = (UIScreen.main.bounds.width - Constants.imageHorizontalPadding * 3 / 2.0) * ratio
           } else {
-            ratio = response.image.size.width / response.image.size.height
+            ratio = Double(response.imageAPIResponse.width) / Double(response.imageAPIResponse.height)
             height = UIScreen.main.bounds.width - Constants.imageSpacing * 3 / 2.0
           }
           
@@ -101,7 +105,7 @@ class AuthorPhotoListViewModel: ObservableObject {
             ratio: ratio,
             height: height,
             title: response.imageAPIResponse.altDescription ?? "",
-            uiImage: response.image,
+            uiImage: uiImage,
             imageInfo: response.imageAPIResponse
           )
         }
