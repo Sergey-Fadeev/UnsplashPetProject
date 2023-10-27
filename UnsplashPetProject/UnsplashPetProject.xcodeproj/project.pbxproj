@@ -11,7 +11,6 @@
 		890221902AEAB22600F746EE /* APITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8902218F2AEAB22600F746EE /* APITarget.swift */; };
 		890221932AEAB28F00F746EE /* LoadPageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890221922AEAB28F00F746EE /* LoadPageRequest.swift */; };
 		890221962AEBA3A400F746EE /* AuthorPhotoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890221952AEBA3A400F746EE /* AuthorPhotoListViewModel.swift */; };
-		890221992AEBA88700F746EE /* DoublePhotoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890221982AEBA88700F746EE /* DoublePhotoListView.swift */; };
 		895BFBD22AD42865006BBEDC /* UnsplashPetProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFBD12AD42865006BBEDC /* UnsplashPetProjectApp.swift */; };
 		895BFBD62AD42867006BBEDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895BFBD52AD42867006BBEDC /* Assets.xcassets */; };
 		895BFBD92AD42867006BBEDC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895BFBD82AD42867006BBEDC /* Preview Assets.xcassets */; };
@@ -51,7 +50,6 @@
 		8902218F2AEAB22600F746EE /* APITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITarget.swift; sourceTree = "<group>"; };
 		890221922AEAB28F00F746EE /* LoadPageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadPageRequest.swift; sourceTree = "<group>"; };
 		890221952AEBA3A400F746EE /* AuthorPhotoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorPhotoListViewModel.swift; sourceTree = "<group>"; };
-		890221982AEBA88700F746EE /* DoublePhotoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublePhotoListView.swift; sourceTree = "<group>"; };
 		895BFBCE2AD42865006BBEDC /* UnsplashPetProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashPetProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		895BFBD12AD42865006BBEDC /* UnsplashPetProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashPetProjectApp.swift; sourceTree = "<group>"; };
 		895BFBD52AD42867006BBEDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -122,14 +120,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		890221972AEBA80000F746EE /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				890221982AEBA88700F746EE /* DoublePhotoListView.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
 		895BFBC52AD42865006BBEDC = {
 			isa = PBXGroup;
 			children = (
@@ -156,7 +146,6 @@
 				895BFBD12AD42865006BBEDC /* UnsplashPetProjectApp.swift */,
 				89C232C62AEA52A6001778D9 /* Flows */,
 				895BFC042AD42E5E006BBEDC /* APIService */,
-				890221972AEBA80000F746EE /* Components */,
 				89C232BB2AE90883001778D9 /* Constants */,
 				89C232C12AEA475E001778D9 /* Info.plist */,
 				895BFBD52AD42867006BBEDC /* Assets.xcassets */,
@@ -433,7 +422,6 @@
 			files = (
 				89E677BF2AE7EF910008C06D /* MainScreenViewModel.swift in Sources */,
 				89C232C92AEA52EA001778D9 /* ImageDetailView.swift in Sources */,
-				890221992AEBA88700F746EE /* DoublePhotoListView.swift in Sources */,
 				895BFC122AD43741006BBEDC /* ImageResponse.swift in Sources */,
 				895BFC082AD42E85006BBEDC /* APIUnsplashResponse.swift in Sources */,
 				895BFC0A2AD42EA1006BBEDC /* NetworkService.swift in Sources */,

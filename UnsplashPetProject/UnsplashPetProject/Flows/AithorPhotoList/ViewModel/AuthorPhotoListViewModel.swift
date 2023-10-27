@@ -21,11 +21,11 @@ class AuthorPhotoListViewModel: ObservableObject {
   
   private var cancellables = Set<AnyCancellable>()
   var networkService: NetworkService
-  var userName: String?
+  var imageInfo: APIImageResponse
   
-  init(networkService: NetworkService, userName: String?) {
+  init(networkService: NetworkService, imageInfo: APIImageResponse) {
     self.networkService = networkService
-    self.userName = userName
+    self.imageInfo = imageInfo
     
     bind()
   }
@@ -48,7 +48,7 @@ class AuthorPhotoListViewModel: ObservableObject {
   }
   
   func requestItems(page: Int) {
-    networkService.loadImages(page: page, username: userName)
+    networkService.loadImages(page: page, username: imageInfo.user?.username)
       .sink(
         receiveCompletion: { error in
           print("\(error)")

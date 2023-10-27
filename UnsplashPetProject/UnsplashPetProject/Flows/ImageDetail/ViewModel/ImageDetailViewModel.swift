@@ -17,6 +17,7 @@ class ImageDetailViewModel: ObservableObject {
   @Published var imageData = Data()
   @Published var gridItem: GridItem
   
+  var isAuthorsImageDetail: Bool
   
   private var currentPage = 0
   private var leftHeight: Double = 0
@@ -25,30 +26,10 @@ class ImageDetailViewModel: ObservableObject {
   private var cancellables = Set<AnyCancellable>()
   var networkService: NetworkService
   
-  init(networkService: NetworkService, gridItem: GridItem) {
+  init(networkService: NetworkService, gridItem: GridItem, isAuthorsImageDetail: Bool) {
     self.networkService = networkService
+    self.isAuthorsImageDetail = isAuthorsImageDetail
     self.gridItem = gridItem
-    
-    bind()
-  }
-  
-  private func bind() {
-    networkService.loadImage(urlString: gridItem.imageInfo.imageUrls.regular)
-      .eraseToAnyPublisher()
-      .receive(on: DispatchQueue.main)
-      .sink(
-        receiveCompletion: { error in
-          print("\(error)")
-        },
-        receiveValue: { [weak self] imageData in
-          guard let self = self else {
-            return
-          }
-          
-          self.imageData = imageData
-        }
-      )
-      .store(in: &cancellables)
   }
   
 }

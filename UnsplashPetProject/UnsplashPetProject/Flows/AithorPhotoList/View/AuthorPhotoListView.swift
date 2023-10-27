@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AuthorPhotoListView: View {
   
+  @Environment(\.dismiss) var dismiss
+  
   @ObservedObject var viewModel: AuthorPhotoListViewModel
   
   init(
@@ -19,12 +21,100 @@ struct AuthorPhotoListView: View {
   }
   
   var body: some View {
-    ScrollView {
+    HStack {
+      Button(action: {
+        dismiss()
+        
+      }) {
+        Image(systemName: "chevron.left")
+          .resizable()
+          .frame(width: 12, height: 16)
+          .symbolRenderingMode(.multicolor)
+          .foregroundColor(.black)
+          
+      }
+      .frame(width: 12, height: 16, alignment: .leading)
+      .padding(EdgeInsets(top: 12, leading: Constants.imageHorizontalPadding, bottom: 0, trailing: 0))
+      Spacer()
+    }
+    
+    ScrollView(.vertical, showsIndicators: false) {
+      AsyncImage(url: URL(string: viewModel.imageInfo.user?.profileImage.large ?? "")) { image in
+        image
+          .resizable()
+          .scaledToFill()
+      } placeholder: {
+        ProgressView()
+      }
+      .frame(width: 128, height: 128)
+      .clipShape(Circle())
+      
+      Text(viewModel.imageInfo.user?.name ?? "")
+        .font(.headline)
+        .padding(EdgeInsets(top: 24, leading: 24, bottom: 0, trailing: 24))
+      
+      Text(viewModel.imageInfo.user?.instagramUsername ?? "")
+        .font(.footnote)
+        .foregroundStyle(.gray)
+        .padding(EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24))
+      
+      HStack {
+        VStack {
+          var totalPhotos: String {
+            guard let totalPhotos = viewModel.imageInfo.user?.totalPhotos else {
+              return "0"
+            }
+            
+            guard totalPhotos > 1000 else {
+              return String(totalPhotos)
+            }
+            
+            return "\(Int(totalPhotos / 1000)),\(Int(totalPhotos % 1000 / 100))k"
+          }
+          
+          Text(totalPhotos)
+            .font(.headline)
+            .padding(EdgeInsets(top: 24, leading: 24, bottom: 0, trailing: 24))
+          
+          Text("Photos")
+            .font(.footnote)
+            .foregroundStyle(.gray)
+            .padding(EdgeInsets(top: 0, leading: 24, bottom: 24, trailing: 24))
+        }
+        
+        VStack {
+          var totalLikes: String {
+            guard let totalLikes = viewModel.imageInfo.user?.totalLikes else {
+              return "0"
+            }
+            
+            guard totalLikes > 1000 else {
+              return String(totalLikes)
+            }
+            
+            return "\(Int(totalLikes / 1000)),\(Int(totalLikes % 1000 / 100))k"
+          }
+          
+          Text(totalLikes)
+            .font(.headline)
+            .padding(EdgeInsets(top: 24, leading: 24, bottom: 0, trailing: 24))
+          
+          Text("Likes")
+            .font(.footnote)
+            .foregroundStyle(.gray)
+            .padding(EdgeInsets(top: 0, leading: 24, bottom: 24, trailing: 24))
+        }
+      }
+      
       HStack(alignment: .top, spacing: Constants.imageSpacing) {
         ForEach(viewModel.columns) { column in
           LazyVStack(spacing: Constants.imageSpacing) {
             ForEach (column.gridItems) { gridItem in
-              NavigationLink(destination: ImageDetailView(viewModel: ImageDetailViewModel(networkService: viewModel.networkService, gridItem: gridItem))) {
+              NavigationLink(destination: ImageDetailView(
+                viewModel: ImageDetailViewModel(
+                  networkService: viewModel.networkService, gridItem: gridItem, isAuthorsImageDetail: true
+                )
+              )) {
                 Image(uiImage: gridItem.uiImage)
                   .resizable()
                   .aspectRatio(contentMode: .fit)
@@ -41,6 +131,7 @@ struct AuthorPhotoListView: View {
       }
       .padding(.horizontal, Constants.imageHorizontalPadding)
     }
+    .navigationBarHidden(true)
     .overlay {
       if viewModel.dataIsLoading {
         RoundedRectangle(cornerRadius: 12)

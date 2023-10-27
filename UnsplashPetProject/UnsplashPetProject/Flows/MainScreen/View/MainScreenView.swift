@@ -46,12 +46,18 @@ struct MainScreenView: View {
   
   var body: some View {
     NavigationView {
-      ScrollView {
+      ScrollView(.vertical, showsIndicators: false) {
         HStack(alignment: .top, spacing: Constants.imageSpacing) {
           ForEach(viewModel.columns) { column in
             LazyVStack(spacing: Constants.imageSpacing) {
               ForEach (column.gridItems) { gridItem in
-                NavigationLink(destination: ImageDetailView(viewModel: ImageDetailViewModel(networkService: viewModel.networkService, gridItem: gridItem))) {
+                NavigationLink(destination: ImageDetailView(
+                  viewModel: ImageDetailViewModel(
+                    networkService: viewModel.networkService,
+                    gridItem: gridItem,
+                    isAuthorsImageDetail: false
+                  )
+                )) {
                   Image(uiImage: gridItem.uiImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
