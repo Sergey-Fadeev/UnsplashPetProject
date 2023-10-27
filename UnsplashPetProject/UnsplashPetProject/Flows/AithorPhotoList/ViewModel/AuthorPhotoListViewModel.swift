@@ -1,14 +1,14 @@
 //
-//  ImageLoaderViewModel.swift
+//  AuthorPhotoListViewModel.swift
 //  UnsplashPetProject
 //
-//  Created by Sergey on 24.10.2023.
+//  Created by Sergey on 27.10.2023.
 //
 
 import SwiftUI
 import Combine
 
-class MainScreenViewModel: ObservableObject {
+class AuthorPhotoListViewModel: ObservableObject {
   
   @Published var columns: [Column] = [Column(), Column()]
   @Published var dataIsLoading = false
@@ -21,9 +21,12 @@ class MainScreenViewModel: ObservableObject {
   
   private var cancellables = Set<AnyCancellable>()
   var networkService: NetworkService
+  var userName: String?
   
-  init(networkService: NetworkService) {
+  init(networkService: NetworkService, userName: String?) {
     self.networkService = networkService
+    self.userName = userName
+    
     bind()
   }
   
@@ -45,7 +48,7 @@ class MainScreenViewModel: ObservableObject {
   }
   
   func requestItems(page: Int) {
-    networkService.loadImages(page: page)
+    networkService.loadImages(page: page, username: userName)
       .sink(
         receiveCompletion: { error in
           print("\(error)")

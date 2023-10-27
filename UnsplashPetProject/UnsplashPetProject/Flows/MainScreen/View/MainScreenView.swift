@@ -41,13 +41,11 @@ struct MainScreenView: View {
     viewModel: MainScreenViewModel
   ) {
     self.viewModel = viewModel
-    viewModel.bind()
     viewModel.requestInitialSetOfItems()
   }
   
   var body: some View {
     NavigationView {
-      
       ScrollView {
         HStack(alignment: .top, spacing: Constants.imageSpacing) {
           ForEach(viewModel.columns) { column in

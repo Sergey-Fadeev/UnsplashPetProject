@@ -12,17 +12,11 @@ class NetworkService: ObservableObject {
   
   static let shared = NetworkService()
   
-  @Published var itemsResponse: APIUnsplashResponse?
-  
   private init() { }
   
   func loadImages(page: Int, username: String? = nil) -> AnyPublisher<[APIImageResponse], Error> {
     let apiTarget = DefaulAPITarget.loadImages(
-      LoadPageRequest(
-        page: page,
-        clientId: "Ad3y-sB1XiKe0Q0nJITelHrKFrDbGr1h5iUpjJadDAE",
-        username: username
-      )
+      LoadPageRequest(page: page, username: username)
     )
     
     let url = URL(string: apiTarget.fullUrlString)!

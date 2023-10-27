@@ -13,7 +13,6 @@ struct ImageDetailView: View {
   
   init(viewModel: ImageDetailViewModel) {
     self.viewModel = viewModel
-    viewModel.bind()
   }
   
   var body: some View {
@@ -63,7 +62,12 @@ struct ImageDetailView: View {
           Text("Автор: \(viewModel.gridItem.imageInfo.user?.name ?? "")")
           Spacer()
           NavigationLink(
-            destination: AuthorPhotoListView(),
+            destination: AuthorPhotoListView(
+              viewModel: AuthorPhotoListViewModel(
+                networkService: viewModel.networkService,
+                userName: viewModel.gridItem.imageInfo.user?.username
+              )
+            ),
             label: {
               Text("Перейти к фотографиям автора")
                 .font(.caption)

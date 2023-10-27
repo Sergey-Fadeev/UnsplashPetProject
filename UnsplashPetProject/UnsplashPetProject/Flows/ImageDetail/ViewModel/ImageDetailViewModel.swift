@@ -14,23 +14,8 @@ class ImageDetailViewModel: ObservableObject {
   @Published var dataIsLoading = false
   
   
-  
-  
-  
-  
-  
-  
   @Published var imageData = Data()
   @Published var gridItem: GridItem
-//  private let gridItemSubject: CurrentValueSubject<GridItem, Never>
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   private var currentPage = 0
@@ -38,7 +23,7 @@ class ImageDetailViewModel: ObservableObject {
   private var rightHeight: Double = 0
   
   private var cancellables = Set<AnyCancellable>()
-  private var networkService: NetworkService
+  var networkService: NetworkService
   
   init(networkService: NetworkService, gridItem: GridItem) {
     self.networkService = networkService
@@ -47,8 +32,7 @@ class ImageDetailViewModel: ObservableObject {
     bind()
   }
   
-  
-  func bind() {
+  private func bind() {
     networkService.loadImage(urlString: gridItem.imageInfo.imageUrls.regular)
       .eraseToAnyPublisher()
       .receive(on: DispatchQueue.main)
