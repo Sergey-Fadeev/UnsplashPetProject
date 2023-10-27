@@ -10,7 +10,6 @@ import SwiftUI
 struct ImageDetailView: View {
   
   @Environment(\.dismiss) var dismiss
-  
   @ObservedObject var viewModel: ImageDetailViewModel
   
   init(viewModel: ImageDetailViewModel) {
@@ -115,7 +114,3 @@ struct ImageDetailView: View {
   }
   
 }
-
-//#Preview {
-//  ImageDetailView()
-//}

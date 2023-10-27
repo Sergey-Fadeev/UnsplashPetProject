@@ -8,8 +8,6 @@
 import Foundation
 
 struct Column: Identifiable {
-  
   let id = UUID()
   var gridItems = [GridItem]()
-  
 }
