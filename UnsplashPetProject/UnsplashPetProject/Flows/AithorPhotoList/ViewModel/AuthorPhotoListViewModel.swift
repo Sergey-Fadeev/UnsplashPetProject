@@ -13,6 +13,9 @@ class AuthorPhotoListViewModel: ObservableObject {
   @Published var columns: [Column] = [Column(), Column()]
   @Published var dataIsLoading = false
   
+  @Published var error: Error?
+  @Published var isShowingError = false
+  
   private let imageUrlsSubject = CurrentValueSubject<[APIImageResponse], Never>([])
   
   private var currentPage = 0
@@ -49,9 +52,17 @@ class AuthorPhotoListViewModel: ObservableObject {
   
   func requestItems(page: Int) {
     networkService.loadImages(page: page, username: imageInfo.user?.username)
+      .receive(on: DispatchQueue.main)
       .sink(
-        receiveCompletion: { error in
-          print("\(error)")
+        receiveCompletion: { [weak self] error in
+          switch error {
+          case .finished:
+            break
+          case .failure(let failure):
+            self?.dataIsLoading = false
+            self?.error = .some(failure)
+            self?.isShowingError = true
+          }
         },
         receiveValue: { [weak self] response in
           guard let self = self else {
