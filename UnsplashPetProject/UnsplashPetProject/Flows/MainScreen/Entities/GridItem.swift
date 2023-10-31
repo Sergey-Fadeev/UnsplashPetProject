@@ -12,7 +12,5 @@ struct GridItem: Identifiable {
   let id = UUID()
   let ratio: Double
   let height: Double
-  let title: String
-  let uiImage: UIImage
   let imageInfo: DomainImageResponse
 }

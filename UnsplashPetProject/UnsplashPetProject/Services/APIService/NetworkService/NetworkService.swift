@@ -45,27 +45,6 @@ class NetworkService: ObservableObject {
       .eraseToAnyPublisher()
   }
   
-  func loadImages(responseArray: [DomainImageResponse]) -> AnyPublisher<[DomainFullInfoImage], Error> {
-    let imageLoaders = responseArray.enumerated().map { index, imageRsponse -> AnyPublisher<DomainFullInfoImage?, Never> in
-      guard let url = URL(string: imageRsponse.imageUrls.small) else {
-        return Empty(completeImmediately: false).eraseToAnyPublisher()
-      }
-      
-      return URLSession.shared.dataTaskPublisher(for: url)
-        .map { data, _ -> DomainFullInfoImage? in
-          DomainFullInfoImage(imageData: data, imageAPIResponse: responseArray[index])
-        }
-        .catch { _ in Just(nil) }
-        .eraseToAnyPublisher()
-    }
-    
-    return Publishers.Sequence(sequence: imageLoaders)
-      .flatMap { $0 }
-      .compactMap { $0 }
-      .collect()
-      .eraseToAnyPublisher()
-  }
-  
   func loadImage(urlString: String) -> AnyPublisher<Data, Error> {
     guard let url = URL(string: urlString) else {
       return Empty(completeImmediately: false).eraseToAnyPublisher()

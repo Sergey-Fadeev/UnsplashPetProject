@@ -115,10 +115,23 @@ struct AuthorPhotoListView: View {
                   networkService: viewModel.networkService, gridItem: gridItem, isAuthorsImageDetail: true
                 )
               )) {
-                Image(uiImage: gridItem.uiImage)
-                  .resizable()
-                  .aspectRatio(contentMode: .fit)
-                  .cornerRadius(12)
+                let width = (UIScreen.main.bounds.width - Constants.imageSpacing * 3) / 2.0
+                
+                AsyncImage(url: URL(string: gridItem.imageInfo.imageUrls.small)) { image in
+                  image
+                    .resizable()
+                    .scaledToFill()
+                    .cornerRadius(12)
+                } placeholder: {
+                  RoundedRectangle(cornerRadius: 12)
+                    .fill(Color.gray)
+                    .frame(width: width, height: width * gridItem.ratio, alignment: .center)
+                    .opacity(0.5)
+                    .overlay {
+                      ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color.black))
+                    }
+                }
               }
             }
             
@@ -132,18 +145,6 @@ struct AuthorPhotoListView: View {
       .padding(.horizontal, Constants.imageHorizontalPadding)
     }
     .navigationBarHidden(true)
-    .overlay {
-      if viewModel.dataIsLoading {
-        RoundedRectangle(cornerRadius: 12)
-          .fill(Color.white)
-          .frame(width: 75, height: 75)
-          .opacity(0.8)
-        
-        ProgressView()
-          .progressViewStyle(CircularProgressViewStyle(tint: Color.black))
-          .scaleEffect(1.5, anchor: .center)
-      }
-    }
     .coordinateSpace(name: "scrollView")
     .onPreferenceChange(ViewOffsetKey.self) { minY in
       if minY > -150 {

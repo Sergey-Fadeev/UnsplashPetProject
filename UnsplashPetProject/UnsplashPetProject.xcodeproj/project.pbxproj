@@ -22,6 +22,8 @@
 		890221AD2AEC06BC00F746EE /* DomainImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890221AC2AEC06BC00F746EE /* DomainImageResponse.swift */; };
 		890221AF2AEC0AE000F746EE /* DomainFullImageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890221AE2AEC0AE000F746EE /* DomainFullImageInfo.swift */; };
 		890221B12AEC10BE00F746EE /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890221B02AEC10BE00F746EE /* CustomError.swift */; };
+		890800412AF0F3A70050886B /* ImageCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890800402AF0F3A70050886B /* ImageCellView.swift */; };
+		890800452AF0F4D90050886B /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890800442AF0F4D90050886B /* ImageCache.swift */; };
 		895BFBD22AD42865006BBEDC /* UnsplashPetProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895BFBD12AD42865006BBEDC /* UnsplashPetProjectApp.swift */; };
 		895BFBD62AD42867006BBEDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895BFBD52AD42867006BBEDC /* Assets.xcassets */; };
 		895BFBD92AD42867006BBEDC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895BFBD82AD42867006BBEDC /* Preview Assets.xcassets */; };
@@ -71,6 +73,8 @@
 		890221AC2AEC06BC00F746EE /* DomainImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainImageResponse.swift; sourceTree = "<group>"; };
 		890221AE2AEC0AE000F746EE /* DomainFullImageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainFullImageInfo.swift; sourceTree = "<group>"; };
 		890221B02AEC10BE00F746EE /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
+		890800402AF0F3A70050886B /* ImageCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellView.swift; sourceTree = "<group>"; };
+		890800442AF0F4D90050886B /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		895BFBCE2AD42865006BBEDC /* UnsplashPetProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashPetProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		895BFBD12AD42865006BBEDC /* UnsplashPetProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashPetProjectApp.swift; sourceTree = "<group>"; };
 		895BFBD52AD42867006BBEDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -161,6 +165,23 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
+		890800422AF0F4B20050886B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				890800432AF0F4C40050886B /* ImageCashe */,
+				895BFC042AD42E5E006BBEDC /* APIService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		890800432AF0F4C40050886B /* ImageCashe */ = {
+			isa = PBXGroup;
+			children = (
+				890800442AF0F4D90050886B /* ImageCache.swift */,
+			);
+			path = ImageCashe;
+			sourceTree = "<group>";
+		};
 		895BFBC52AD42865006BBEDC = {
 			isa = PBXGroup;
 			children = (
@@ -187,7 +208,7 @@
 				895BFBD12AD42865006BBEDC /* UnsplashPetProjectApp.swift */,
 				890221A52AEC050600F746EE /* Domain */,
 				89C232C62AEA52A6001778D9 /* Flows */,
-				895BFC042AD42E5E006BBEDC /* APIService */,
+				890800422AF0F4B20050886B /* Services */,
 				89C232BB2AE90883001778D9 /* Constants */,
 				89C232C12AEA475E001778D9 /* Info.plist */,
 				895BFBD52AD42867006BBEDC /* Assets.xcassets */,
@@ -265,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				89C232B92AE9061D001778D9 /* MainScreenView.swift */,
+				890800402AF0F3A70050886B /* ImageCellView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -476,8 +498,10 @@
 				890221A92AEC05BF00F746EE /* DomainUserResponse.swift in Sources */,
 				895BFC0A2AD42EA1006BBEDC /* NetworkService.swift in Sources */,
 				8902218E2AEA8FA100F746EE /* ImageDetailViewModel.swift in Sources */,
+				890800452AF0F4D90050886B /* ImageCache.swift in Sources */,
 				890221932AEAB28F00F746EE /* LoadPageRequest.swift in Sources */,
 				895BFBD22AD42865006BBEDC /* UnsplashPetProjectApp.swift in Sources */,
+				890800412AF0F3A70050886B /* ImageCellView.swift in Sources */,
 				890221A02AEC03E100F746EE /* APIUserResponse.swift in Sources */,
 				890221AF2AEC0AE000F746EE /* DomainFullImageInfo.swift in Sources */,
 				89C232BA2AE9061D001778D9 /* MainScreenView.swift in Sources */,
