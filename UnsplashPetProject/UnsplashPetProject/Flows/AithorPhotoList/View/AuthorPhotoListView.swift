@@ -117,21 +117,8 @@ struct AuthorPhotoListView: View {
               )) {
                 let width = (UIScreen.main.bounds.width - Constants.imageSpacing * 3) / 2.0
                 
-                AsyncImage(url: URL(string: gridItem.imageInfo.imageUrls.small)) { image in
-                  image
-                    .resizable()
-                    .scaledToFill()
-                    .cornerRadius(12)
-                } placeholder: {
-                  RoundedRectangle(cornerRadius: 12)
-                    .fill(Color.gray)
-                    .frame(width: width, height: width * gridItem.ratio, alignment: .center)
-                    .opacity(0.5)
-                    .overlay {
-                      ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color.black))
-                    }
-                }
+                ImageCellView(imageUrlString: gridItem.imageInfo.imageUrls.small)
+                  .frame(width: width, height: width * gridItem.ratio, alignment: .center)
               }
             }
             
