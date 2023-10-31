@@ -70,12 +70,9 @@ class MainScreenViewModel: ObservableObject {
         
         let gridItems: [GridItem] = imagesArray.compactMap { response in
           let ratio = Double(response.height) / Double(response.width)
-          let width = UIScreen.main.bounds.width - Constants.imageHorizontalPadding * 3 / 2.0
-          let height = width * ratio
           
           return GridItem(
             ratio: ratio,
-            height: height,
             imageInfo: response, 
             imageCellViewModel: ImageCellViewModel(imageUrlString: response.imageUrls.small, networkService: self.networkService)
           )
@@ -87,10 +84,10 @@ class MainScreenViewModel: ObservableObject {
         for gridItem in gridItems {
           if columnsHeights[0] > columnsHeights[1] {
             columns[1].gridItems.append(gridItem)
-            columnsHeights[1] += gridItem.height + Constants.imageSpacing
+            columnsHeights[1] += gridItem.ratio
           } else {
             columns[0].gridItems.append(gridItem)
-            columnsHeights[0] += gridItem.height + Constants.imageSpacing
+            columnsHeights[0] += gridItem.ratio
           }
         }
         

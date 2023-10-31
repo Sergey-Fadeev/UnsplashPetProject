@@ -39,12 +39,12 @@ struct ImageDetailView: View {
       }) {
         Image(systemName: "chevron.left")
           .resizable()
-          .frame(width: 12, height: 16)
+          .frame(width: 12, height: 18)
           .symbolRenderingMode(.multicolor)
           .foregroundColor(.black)
           
       }
-      .frame(width: 12, height: 16, alignment: .leading)
+      .frame(width: 12, height: 18, alignment: .leading)
       .padding(EdgeInsets(top: 12, leading: Constants.imageHorizontalPadding, bottom: 0, trailing: 0))
       Spacer()
     }

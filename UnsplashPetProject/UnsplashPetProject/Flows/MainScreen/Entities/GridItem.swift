@@ -11,7 +11,6 @@ import SwiftUI
 struct GridItem: Identifiable {
   let id = UUID()
   let ratio: Double
-  let height: Double
   let imageInfo: DomainImageResponse
   let imageCellViewModel: ImageCellViewModel
 }
