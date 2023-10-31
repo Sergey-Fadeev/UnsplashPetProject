@@ -115,10 +115,10 @@ struct AuthorPhotoListView: View {
                   networkService: viewModel.networkService, gridItem: gridItem, isAuthorsImageDetail: true
                 )
               )) {
-                let width = (UIScreen.main.bounds.width - Constants.imageSpacing * 3) / 2.0
+                let cellWidth = (UIScreen.main.bounds.width - Constants.imageSpacing * 3) / 2.0
                 
                 ImageCellView(viewModel: gridItem.imageCellViewModel)
-                  .frame(width: width, height: width * gridItem.ratio, alignment: .center)
+                  .frame(width: cellWidth, height: cellWidth * gridItem.ratio, alignment: .center)
               }
             }
             
