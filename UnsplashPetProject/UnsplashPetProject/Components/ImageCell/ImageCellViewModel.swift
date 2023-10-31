@@ -11,13 +11,13 @@ import UIKit
 class ImageCellViewModel: ObservableObject {
   
   @Published var image: UIImage?
+  private var imageUrlString: String
+  private var networkService: NetworkService
   private var cancellables = Set<AnyCancellable>()
   
-  private var imageUrlString: String
-  private var networkService = NetworkService.shared
-  
-  init(imageUrlString: String) {
+  init(imageUrlString: String, networkService: NetworkService) {
     self.imageUrlString = imageUrlString
+    self.networkService = networkService
   }
   
   func loadImage() {

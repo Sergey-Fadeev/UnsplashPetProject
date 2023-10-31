@@ -10,9 +10,6 @@ import Combine
 
 struct ImageCellView: View {
   
-  @State var image: UIImage?
-  @State private var cancellables = Set<AnyCancellable>()
-  
   @ObservedObject var viewModel: ImageCellViewModel
   
   var body: some View {

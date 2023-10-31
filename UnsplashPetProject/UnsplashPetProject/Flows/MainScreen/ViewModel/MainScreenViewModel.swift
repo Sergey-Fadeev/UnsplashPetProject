@@ -77,7 +77,7 @@ class MainScreenViewModel: ObservableObject {
             ratio: ratio,
             height: height,
             imageInfo: response, 
-            imageCellViewModel: ImageCellViewModel(imageUrlString: response.imageUrls.small)
+            imageCellViewModel: ImageCellViewModel(imageUrlString: response.imageUrls.small, networkService: self.networkService)
           )
         }
         
