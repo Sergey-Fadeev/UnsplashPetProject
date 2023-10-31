@@ -63,36 +63,21 @@ class MainScreenViewModel: ObservableObject {
   
   private func bind() {
     imageUrlsSubject
-      .flatMap { [weak self] imagesArray -> AnyPublisher<[DomainFullInfoImage], Error> in
+      .flatMap { [weak self] imagesArray -> AnyPublisher<([Column], [Double]), Never> in
         guard let self = self else {
           return Empty(completeImmediately: false).eraseToAnyPublisher()
         }
         
-        return self.networkService.loadImages(responseArray: imagesArray)
-      }
-      .flatMap { images -> AnyPublisher<([Column], [Double]), Never> in
-        let gridItems: [GridItem] = images.compactMap { response in
-          guard let uiImage = UIImage(data: response.imageData) else {
-            return nil
-          }
-          
-          var ratio: Double = 0
-          var height: Double = 0
-          
-          if response.imageAPIResponse.height > response.imageAPIResponse.width {
-            ratio = Double(response.imageAPIResponse.height) / Double(response.imageAPIResponse.width)
-            height = (UIScreen.main.bounds.width - Constants.imageHorizontalPadding * 3 / 2.0) * ratio
-          } else {
-            ratio = Double(response.imageAPIResponse.width) / Double(response.imageAPIResponse.height)
-            height = UIScreen.main.bounds.width - Constants.imageSpacing * 3 / 2.0
-          }
+        let gridItems: [GridItem] = imagesArray.compactMap { response in
+          let ratio = Double(response.height) / Double(response.width)
+          let width = UIScreen.main.bounds.width - Constants.imageHorizontalPadding * 3 / 2.0
+          let height = width * ratio
           
           return GridItem(
             ratio: ratio,
             height: height,
-            title: response.imageAPIResponse.altDescription ?? "",
-            uiImage: uiImage,
-            imageInfo: response.imageAPIResponse
+            imageInfo: response, 
+            imageCellViewModel: ImageCellViewModel(imageUrlString: response.imageUrls.small, networkService: self.networkService)
           )
         }
         

@@ -39,10 +39,10 @@ struct MainScreenView: View {
                       isAuthorsImageDetail: false
                     )
                   )) {
-                    Image(uiImage: gridItem.uiImage)
-                      .resizable()
-                      .aspectRatio(contentMode: .fit)
-                      .cornerRadius(12)
+                    let width = (UIScreen.main.bounds.width - Constants.imageSpacing * 3) / 2.0
+                    
+                    ImageCellView(viewModel: gridItem.imageCellViewModel)
+                      .frame(width: width, height: width * gridItem.ratio, alignment: .center)
                   }
                 }
                 
@@ -54,18 +54,6 @@ struct MainScreenView: View {
             }
           }
           .padding(.horizontal, Constants.imageHorizontalPadding)
-        }
-        .overlay {
-          if viewModel.dataIsLoading {
-            RoundedRectangle(cornerRadius: 12)
-              .fill(Color.white)
-              .frame(width: 75, height: 75)
-              .opacity(0.8)
-            
-            ProgressView()
-              .progressViewStyle(CircularProgressViewStyle(tint: Color.black))
-              .scaleEffect(1.5, anchor: .center)
-          }
         }
         .coordinateSpace(name: "scrollView")
         .onPreferenceChange(ViewOffsetKey.self) { minY in
