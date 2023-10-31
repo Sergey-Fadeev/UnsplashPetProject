@@ -90,7 +90,8 @@ class AuthorPhotoListViewModel: ObservableObject {
           return GridItem(
             ratio: ratio,
             height: height,
-            imageInfo: response
+            imageInfo: response,
+            imageCellViewModel: ImageCellViewModel(imageUrlString: response.imageUrls.small)
           )
         }
         

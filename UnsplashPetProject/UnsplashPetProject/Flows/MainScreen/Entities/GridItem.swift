@@ -13,4 +13,5 @@ struct GridItem: Identifiable {
   let ratio: Double
   let height: Double
   let imageInfo: DomainImageResponse
+  let imageCellViewModel: ImageCellViewModel
 }

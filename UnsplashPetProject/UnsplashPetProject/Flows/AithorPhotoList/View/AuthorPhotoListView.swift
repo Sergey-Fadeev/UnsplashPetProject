@@ -117,7 +117,7 @@ struct AuthorPhotoListView: View {
               )) {
                 let width = (UIScreen.main.bounds.width - Constants.imageSpacing * 3) / 2.0
                 
-                ImageCellView(imageUrlString: gridItem.imageInfo.imageUrls.small)
+                ImageCellView(viewModel: gridItem.imageCellViewModel)
                   .frame(width: width, height: width * gridItem.ratio, alignment: .center)
               }
             }
